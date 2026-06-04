@@ -35,9 +35,11 @@
 </template>
 
 <script setup lang="ts">
+type FooterLink = { label: string; to?: string; href?: string }
+
 const year = new Date().getFullYear()
 
-const footerLinks = [
+const footerLinks: { heading: string; links: FooterLink[] }[] = [
   {
     heading: 'Discover',
     links: [
