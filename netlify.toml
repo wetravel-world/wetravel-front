@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://wetravel-world.netlify.app/*"
+  to = "https://wetravel-world.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
