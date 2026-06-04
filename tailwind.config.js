@@ -24,8 +24,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Source Serif 4"', 'Georgia', 'serif'],
-        sans: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+        serif: ['serif'],
+        sans: ['system-ui', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],
       },
       boxShadow: {

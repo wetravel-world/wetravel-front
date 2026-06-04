@@ -9,8 +9,8 @@
           <span class="text-[13px] font-bold text-wt-deep-blue">Travel like you belong everywhere</span>
         </div>
         <span class="hidden lg:block md:block">
-          <h1 class="font-serif font-semibold leading-[1.1] m-0 mb-6 text-[38px] md:text-[52px] lg:text-[58px] tracking-[-1.2px]">
-            Find the places to
+          <h1 class="font-semibold leading-[1.1] m-0 mb-6 text-[38px] md:text-[52px] lg:text-[58px] tracking-[-1.2px]">
+            Find places where you can
             <span class="text-wt-coral italic">travel safely.</span>
           </h1>
           <p class="text-[16px] md:text-[18px] leading-relaxed text-wt-sub m-0 mb-7 max-w-[480px]">
