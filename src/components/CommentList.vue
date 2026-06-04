@@ -1,0 +1,267 @@
+<template>
+  <div :class="visibleComments.length < 3 ? '' : 'overflow-y-scroll h-[40vh] pb-10'">
+    <p v-if="store.loading" class="text-[14px] text-wt-sub py-4">Loading reviews…</p>
+
+    <div v-else class="flex flex-col gap-4 ">
+      <div
+        v-for="comment in visibleComments"
+        :key="comment.id"
+        class="bg-white rounded-2xl shadow-[0_1px_3px_rgba(42,32,24,0.06)] overflow-hidden"
+      >
+        <!-- comment body -->
+        <div class="p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <!-- avatar -->
+            <img
+              v-if="comment.author_avatar_url"
+              :src="comment.author_avatar_url"
+              :alt="comment.author_username"
+              class="w-10 h-10 rounded-full object-cover flex-shrink-0"
+            />
+            <span v-else class="w-10 h-10 rounded-full bg-wt-coral/20 flex items-center justify-center font-bold text-wt-coral text-[15px] flex-shrink-0">
+              {{ (comment.author_username || 'U')[0].toUpperCase() }}
+            </span>
+
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-[14.5px] text-wt-ink">{{ comment.author_username }}</div>
+              <div class="text-[12px] text-wt-sub">{{ formatDate(comment.created_at) }}</div>
+            </div>
+
+            <!-- delete comment (author only) -->
+            <template v-if="auth.user?.username === comment.author_username">
+              <button
+                v-if="!confirmDeleteComments.has(comment.id)"
+                @click="startDeleteComment(comment.id)"
+                class="p-1.5 text-wt-sub hover:text-red-400 transition-colors rounded-lg flex-shrink-0"
+                title="Delete comment"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                </svg>
+              </button>
+              <div v-else class="flex items-center gap-1.5 flex-shrink-0">
+                <button @click="confirmComment(comment.id)" class="text-[12px] font-bold text-red-500 hover:text-red-600 transition-colors">Delete?</button>
+                <button @click="cancelDeleteComment(comment.id)" class="text-[12px] text-wt-sub hover:text-wt-ink transition-colors">Cancel</button>
+              </div>
+            </template>
+
+            <!-- score stars -->
+            <div class="flex gap-0.5 flex-shrink-0">
+              <svg v-for="n in 5" :key="n" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"
+                :class="n <= Math.round(comment.score / 2) ? 'text-amber-400' : 'text-wt-line'">
+                <path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.9 6.2 20.95l1.1-6.5-4.7-4.6 6.5-.95z"/>
+              </svg>
+            </div>
+          </div>
+
+          <p class="m-0 text-[14.5px] leading-relaxed text-wt-ink">{{ comment.body }}</p>
+
+          <!-- reply toggle -->
+          <button
+            @click="toggleReplies(comment.id)"
+            class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-wt-sub hover:text-wt-coral transition-colors"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span v-if="comment.replies.length">
+              {{ comment.replies.length }} {{ comment.replies.length === 1 ? 'reply' : 'replies' }}
+            </span>
+            <span v-else>Reply</span>
+            <svg
+              :class="['w-3 h-3 transition-transform', openReplies.has(comment.id) ? 'rotate-180' : '']"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            >
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- replies section -->
+        <div v-if="openReplies.has(comment.id)" class="border-t border-wt-line bg-wt-bg px-5 py-4 flex flex-col gap-3">
+
+          <!-- existing replies -->
+          <div
+            v-for="reply in comment.replies"
+            :key="reply.id"
+            class="flex gap-3"
+          >
+            <img
+              v-if="reply.author_avatar_url"
+              :src="reply.author_avatar_url"
+              :alt="reply.author_username"
+              class="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-0.5"
+            />
+            <span v-else class="w-8 h-8 rounded-full bg-wt-coral/15 flex items-center justify-center font-bold text-wt-coral text-[13px] flex-shrink-0 mt-0.5">
+              {{ (reply.author_username || 'U')[0].toUpperCase() }}
+            </span>
+            <div class="flex-1 bg-white rounded-xl px-3.5 py-2.5 shadow-[0_1px_2px_rgba(42,32,24,0.05)]">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-semibold text-[13px] text-wt-ink">{{ reply.author_username }}</span>
+                <span class="text-[11.5px] text-wt-sub">{{ formatDate(reply.created_at) }}</span>
+                <!-- delete reply (author only) -->
+                <template v-if="auth.user?.username === reply.author_username">
+                  <button
+                    v-if="!confirmDeleteReplies.has(replyKey(comment.id, reply.id))"
+                    @click="startDeleteReply(comment.id, reply.id)"
+                    class="ml-auto p-1 text-wt-sub hover:text-red-400 transition-colors rounded"
+                    title="Delete reply"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                    </svg>
+                  </button>
+                  <div v-else class="ml-auto flex items-center gap-1.5">
+                    <button @click="confirmReply(comment.id, reply.id)" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors">Delete?</button>
+                    <button @click="cancelDeleteReply(comment.id, reply.id)" class="text-[11px] text-wt-sub hover:text-wt-ink transition-colors">Cancel</button>
+                  </div>
+                </template>
+              </div>
+              <p class="m-0 text-[13.5px] leading-relaxed text-wt-ink">{{ reply.body }}</p>
+            </div>
+          </div>
+
+          <!-- reply form -->
+          <div v-if="auth.isAuthenticated" class="flex gap-3 mt-1">
+            <img
+              v-if="auth.user?.avatar_url"
+              :src="auth.user.avatar_url"
+              :alt="auth.user.username"
+              class="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-0.5"
+            />
+            <span v-else class="w-8 h-8 rounded-full bg-wt-coral flex items-center justify-center font-bold text-white text-[13px] flex-shrink-0 mt-0.5">
+              {{ (auth.user?.username || 'U')[0].toUpperCase() }}
+            </span>
+            <div class="flex-1 flex gap-2 items-end">
+              <textarea
+                v-model="replyBodies[comment.id]"
+                rows="2"
+                placeholder="Write a reply…"
+                class="flex-1 resize-none text-[13.5px] text-wt-ink bg-white border border-wt-line rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-wt-coral transition leading-relaxed"
+              />
+              <button
+                @click="submitReply(comment.id)"
+                :disabled="submitting[comment.id] || !replyBodies[comment.id]?.trim()"
+                class="flex-shrink-0 bg-wt-coral text-white rounded-xl px-4 py-2.5 text-[13px] font-bold disabled:opacity-50 transition"
+              >
+                {{ submitting[comment.id] ? '…' : 'Send' }}
+              </button>
+            </div>
+          </div>
+          <RouterLink
+            v-else
+            to="/auth/login"
+            class="text-[13px] text-wt-coral font-semibold no-underline hover:underline"
+          >
+            Sign in to reply
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+
+    <!-- expand button -->
+    <button
+      v-if="!store.loading && collapsed && !expanded && store.comments.length > 1"
+      @click="expanded = true"
+      class="w-full mt-2 flex items-center justify-center gap-2 py-3 rounded-2xl border border-wt-line bg-white text-[14px] font-semibold text-wt-ink hover:bg-wt-bg transition"
+    >
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      See all {{ store.comments.length }} reviews
+    </button>
+
+    <p v-if="!store.loading && !store.comments.length" class="text-[14px] text-wt-sub py-5">
+      No reviews yet. Be the first!
+    </p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { reactive, ref, computed, onMounted } from 'vue'
+import { useCommentsStore } from '@/stores/comments'
+import { useAuthStore } from '@/stores/auth'
+
+const props = defineProps<{ citySlug: string; collapsed?: boolean }>()
+const store = useCommentsStore()
+const auth = useAuthStore()
+
+onMounted(() => store.fetchComments(props.citySlug))
+
+const expanded = ref(false)
+const visibleComments = computed(() =>
+  props.collapsed && !expanded.value ? store.comments.slice(0, 1) : store.comments
+)
+
+const openReplies = ref<Set<number>>(new Set())
+const replyBodies = reactive<Record<number, string>>({})
+const submitting = reactive<Record<number, boolean>>({})
+const confirmDeleteComments = ref<Set<number>>(new Set())
+const confirmDeleteReplies = ref<Set<string>>(new Set())
+const deleteTimers: Record<string, ReturnType<typeof setTimeout>> = {}
+
+function replyKey(commentId: number, replyId: number) {
+  return `${commentId}-${replyId}`
+}
+
+function startDeleteComment(commentId: number) {
+  confirmDeleteComments.value = new Set([...confirmDeleteComments.value, commentId])
+  deleteTimers[`c-${commentId}`] = setTimeout(() => cancelDeleteComment(commentId), 4000)
+}
+
+function cancelDeleteComment(commentId: number) {
+  clearTimeout(deleteTimers[`c-${commentId}`])
+  confirmDeleteComments.value.delete(commentId)
+  confirmDeleteComments.value = new Set(confirmDeleteComments.value)
+}
+
+async function confirmComment(commentId: number) {
+  cancelDeleteComment(commentId)
+  await store.deleteComment(props.citySlug, commentId)
+}
+
+function startDeleteReply(commentId: number, replyId: number) {
+  const key = replyKey(commentId, replyId)
+  confirmDeleteReplies.value = new Set([...confirmDeleteReplies.value, key])
+  deleteTimers[`r-${key}`] = setTimeout(() => cancelDeleteReply(commentId, replyId), 4000)
+}
+
+function cancelDeleteReply(commentId: number, replyId: number) {
+  const key = replyKey(commentId, replyId)
+  clearTimeout(deleteTimers[`r-${key}`])
+  confirmDeleteReplies.value.delete(key)
+  confirmDeleteReplies.value = new Set(confirmDeleteReplies.value)
+}
+
+async function confirmReply(commentId: number, replyId: number) {
+  cancelDeleteReply(commentId, replyId)
+  await store.deleteReply(props.citySlug, commentId, replyId)
+}
+
+function toggleReplies(commentId: number) {
+  if (openReplies.value.has(commentId)) {
+    openReplies.value.delete(commentId)
+  } else {
+    openReplies.value.add(commentId)
+  }
+  openReplies.value = new Set(openReplies.value)
+}
+
+async function submitReply(commentId: number) {
+  const body = replyBodies[commentId]?.trim()
+  if (!body) return
+  submitting[commentId] = true
+  try {
+    await store.postReply(props.citySlug, commentId, body)
+    replyBodies[commentId] = ''
+  } catch {
+    // keep body so user can retry
+  } finally {
+    submitting[commentId] = false
+  }
+}
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+}
+</script>
