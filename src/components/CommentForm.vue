@@ -10,7 +10,7 @@
       <label class="block mb-4">
         <span class="block text-[13px] font-semibold text-wt-sub mb-1.5">Your review</span>
         <textarea v-model="body" rows="3" required
-          placeholder="How was your experience as a Black / African traveler?"
+          placeholder="How was your experience ?"
           class="block w-full border-[1.5px] border-wt-line rounded-[11px] px-[13px] py-[11px] text-[14px] text-wt-ink outline-none bg-white resize-none leading-[1.55] transition-colors focus:border-wt-coral" />
       </label>
       <p v-if="error" class="text-[12.5px] text-red-500 mb-2.5">{{ error }}</p>

@@ -78,7 +78,7 @@
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
         <p class="text-[15px] font-semibold text-wt-ink mb-1">No reviews yet</p>
-        <p class="text-[13.5px] text-wt-sub mb-5">Explore a city and share your experience as a Black traveler.</p>
+        <p class="text-[13.5px] text-wt-sub mb-5">Explore a city and share your experience.</p>
         <RouterLink to="/search" class="inline-flex items-center gap-2 bg-wt-coral text-white rounded-xl px-5 py-2.5 font-bold text-[14px] no-underline">
           Explore cities
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
