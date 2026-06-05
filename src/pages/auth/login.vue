@@ -9,6 +9,12 @@
       <div class="flex-1 flex flex-col justify-center max-w-[400px] w-full mx-auto pb-10">
         <h1 class="font-serif text-[34px] font-semibold tracking-[-0.6px] m-0 mb-2">Welcome back</h1>
         <p class="text-[15.5px] text-wt-sub m-0 mb-7 leading-[1.5]">Log in to see your saved cities, trips and referral rewards.</p>
+        <GoogleSignInButton class="mb-5" />
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex-1 h-px bg-wt-line"></div>
+          <span class="text-[13px] text-wt-sub font-medium">or</span>
+          <div class="flex-1 h-px bg-wt-line"></div>
+        </div>
         <form @submit.prevent="submit">
           <label class="block mb-4">
             <span class="block text-[13.5px] font-semibold text-wt-ink mb-[7px]">Email</span>
@@ -57,6 +63,7 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import GoogleSignInButton from '@/components/GoogleSignInButton.vue'
 
 const email = ref('')
 const password = ref('')

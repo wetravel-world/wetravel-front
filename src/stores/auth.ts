@@ -49,5 +49,10 @@ export const useAuthStore = defineStore('auth', () => {
     await api.post('/users/me/password/', payload)
   }
 
-  return { user, isAuthenticated, fetchMe, register, login, logout, updateProfile, updatePassword }
+  async function loginWithGoogle(idToken: string) {
+    await api.post('/auth/google/', { id_token: idToken })
+    await fetchMe()
+  }
+
+  return { user, isAuthenticated, fetchMe, register, login, logout, updateProfile, updatePassword, loginWithGoogle }
 })
