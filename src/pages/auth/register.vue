@@ -1,9 +1,9 @@
 <template>
-  <div class="font-sans text-wt-ink min-h-screen grid grid-cols-2">
+  <div class="font-sans text-wt-ink min-h-screen grid grid-cols-1 md:grid-cols-2">
     <!-- form side -->
-    <div class="bg-wt-bg flex flex-col px-14 py-[30px]">
+    <div class="bg-wt-bg flex flex-col px-5 sm:px-10 md:px-14 py-[30px]">
       <RouterLink to="/" class="flex items-center gap-2.5 no-underline mb-auto">
-        <img src="/logo.png" alt="WeTravel" class="h-[3.5vw] w-auto" />
+        <img src="/logo.png" alt="WeTravel" class="h-8 md:h-[3.5vw] w-auto" />
         <span class="ml-[-15px] font-serif text-[22px] font-semibold text-wt-ink tracking-[-0.3px]">WeTravel</span>
       </RouterLink>
       <div class="flex-1 flex flex-col justify-center max-w-[400px] w-full mx-auto pb-10">
@@ -45,8 +45,8 @@
         </form>
       </div>
     </div>
-    <!-- brand side -->
-    <div class="bg-[#133f81] text-white relative overflow-hidden flex flex-col justify-end p-12">
+    <!-- brand side — hidden on mobile -->
+    <div class="hidden md:flex bg-[#133f81] text-white relative overflow-hidden flex-col justify-end p-12">
       <div class="absolute top-[-60px] right-[-60px] w-[260px] h-[260px] rounded-full bg-[#e9663e55] pointer-events-none" />
       <div class="absolute top-[120px] left-[-80px] w-[200px] h-[200px] rounded-full bg-[#ef8fa033] pointer-events-none" />
       <div class="absolute top-12 left-12 inline-flex items-center gap-2 bg-white/[0.14] rounded-full px-[15px] py-2">
