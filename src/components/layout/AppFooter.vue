@@ -52,7 +52,9 @@ const footerLinks: { heading: string; links: FooterLink[] }[] = [
   {
     heading: 'Legal',
     links: [
-      { label: 'Politique de confidentialité', to: '/rgpd' },
+      { label: 'Confidentialité', to: '/rgpd' },
+      { label: 'CGU', to: '/terms' },
+      { label: 'Cookies', to: '/cookies' },
     ],
   },
   {

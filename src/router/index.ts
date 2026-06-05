@@ -21,6 +21,8 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     { path: '/rgpd', component: () => import('@/pages/rgpd.vue') },
+    { path: '/terms', component: () => import('@/pages/terms.vue') },
+    { path: '/cookies', component: () => import('@/pages/cookies.vue') },
   ],
 })
 
