@@ -140,7 +140,7 @@
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCitiesStore } from '@/stores/cities'
-import { useSeo } from '@/composables/useSeo'
+import { useSeo, useJsonLd } from '@/composables/useSeo'
 import { scoreColor, scoreLabel } from '@/composables/useScore'
 import WelcomeScore from '@/components/WelcomeScore.vue'
 import BookingWidget from '@/components/BookingWidget.vue'
@@ -161,4 +161,32 @@ useSeo(() => ({
   image: city.value?.hero_image_url,
   canonical: `https://we-travel.world/city/${route.params.slug}`,
 }))
+
+useJsonLd(() => {
+  if (!city.value) return null
+  const c = city.value
+  const score = parseFloat(c.welcome_score)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TouristDestination',
+    name: c.name,
+    description: c.meta_description || c.description,
+    url: `https://we-travel.world/city/${c.slug}`,
+    ...(c.hero_image_url ? { image: c.hero_image_url } : {}),
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: c.latitude,
+      longitude: c.longitude,
+    },
+    ...(c.score_count > 0 ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: score.toFixed(1),
+        bestRating: '10',
+        worstRating: '1',
+        ratingCount: c.score_count,
+      },
+    } : {}),
+  }
+})
 </script>

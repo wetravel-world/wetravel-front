@@ -1,4 +1,4 @@
-import { watchEffect } from 'vue'
+import { watchEffect, onUnmounted, getCurrentInstance } from 'vue'
 
 interface SeoMeta {
   title: string
@@ -19,6 +19,33 @@ export function useSeo(meta: () => SeoMeta) {
     if (image) setMeta('og:image', image, 'property')
     if (canonical) setLink('canonical', canonical)
   })
+}
+
+export function useJsonLd(data: () => Record<string, unknown> | null) {
+  const id = 'jsonld-city'
+
+  watchEffect(() => {
+    const payload = data()
+    let el = document.getElementById(id) as HTMLScriptElement | null
+
+    if (!payload) {
+      el?.remove()
+      return
+    }
+
+    if (!el) {
+      el = document.createElement('script')
+      el.id = id
+      el.type = 'application/ld+json'
+      document.head.appendChild(el)
+    }
+
+    el.textContent = JSON.stringify(payload)
+  })
+
+  if (getCurrentInstance()) {
+    onUnmounted(() => document.getElementById(id)?.remove())
+  }
 }
 
 function setMeta(nameOrProp: string, content: string, attr = 'name') {
