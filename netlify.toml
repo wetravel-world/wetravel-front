@@ -18,6 +18,19 @@
   status = 200
   force  = true
 
+# Proxy SEO files → Railway backend
+[[redirects]]
+  from   = "/sitemap.xml"
+  to     = "https://wetravel-back-production.up.railway.app/sitemap.xml"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/robots.txt"
+  to     = "https://wetravel-back-production.up.railway.app/robots.txt"
+  status = 200
+  force  = true
+
 # SPA fallback — required for Vue Router (history mode)
 [[redirects]]
   from   = "/*"
