@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -36,6 +36,17 @@ const error = ref('')
 const label = props.label ?? 'Continue with Google'
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID as string
+
+onMounted(() => {
+  if (!CLIENT_ID) return
+  if (window.google) return
+  if (document.querySelector('script[src*="accounts.google.com/gsi"]')) return
+  const script = document.createElement('script')
+  script.src = 'https://accounts.google.com/gsi/client'
+  script.async = true
+  script.defer = true
+  document.head.appendChild(script)
+})
 
 declare global {
   interface Window {

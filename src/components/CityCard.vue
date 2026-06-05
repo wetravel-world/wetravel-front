@@ -4,12 +4,18 @@
 
       <!-- image -->
       <div class="relative h-48 md:h-52 flex-shrink-0">
-        <div
+        <img
           v-if="city.hero_image_url"
-          class="w-full h-full bg-cover bg-center"
-          :style="`background-image:url(${city.hero_image_url})`"
+          :src="imageUrl"
+          :alt="`${city.name}, ${city.country}`"
+          width="800"
+          height="450"
+          :fetchpriority="isFirst ? 'high' : 'auto'"
+          :loading="isFirst ? 'eager' : 'lazy'"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
         />
-        <div v-else class="w-full h-full" :style="`background:${tone}22`" />
+        <div v-else class="absolute inset-0" :style="`background:${tone}22`" />
 
         <!-- score badge -->
         <div class="absolute top-3 right-3 bg-white rounded-xl px-2.5 py-1.5 flex items-center gap-1.5 shadow-[0_4px_14px_rgba(0,0,0,0.16)]">
@@ -50,4 +56,22 @@ const props = defineProps<{ city: City; index?: number }>()
 const numScore = computed(() => parseFloat(props.city.welcome_score))
 const color = computed(() => scoreColor(numScore.value))
 const tone = computed(() => TONES[(props.index ?? 0) % TONES.length])
+const isFirst = computed(() => (props.index ?? 0) === 0)
+
+const imageUrl = computed(() => {
+  const url = props.city.hero_image_url
+  if (!url) return ''
+  if (url.includes('images.unsplash.com')) {
+    try {
+      const u = new URL(url)
+      u.searchParams.set('fm', 'webp')
+      u.searchParams.set('q', '80')
+      u.searchParams.set('w', '800')
+      return u.toString()
+    } catch {
+      return url
+    }
+  }
+  return url
+})
 </script>

@@ -18,6 +18,23 @@
           </p>
         </span>
         <SearchBar @select="goToCity" />
+
+        <!-- mobile hero image — visible only on mobile, matches preload in <head> for fast LCP -->
+        <div class="md:hidden mt-5 -mx-4 overflow-hidden rounded-none">
+          <picture>
+            <source srcset="/home/rome.webp" type="image/webp" />
+            <img
+              src="/home/rome.jpg"
+              alt="Rome — a welcoming destination"
+              width="800"
+              height="400"
+              fetchpriority="high"
+              decoding="sync"
+              class="w-full h-[180px] object-cover"
+            />
+          </picture>
+        </div>
+
         <div class="flex flex-wrap gap-4 mt-6 text-sm text-wt-sub">
           <span class="inline-flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e9663e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
@@ -145,15 +162,17 @@
               </div>
             </div>
           </div>
-          <!-- dots -->
-          <div class="flex justify-center gap-2 mt-1">
+          <!-- dots — min 44×44px touch target wraps the visual dot -->
+          <div class="flex justify-center gap-0 mt-1">
             <button
               v-for="(_, i) in stories"
               :key="i"
               @click="scrollCarouselTo(i)"
-              :class="['h-2 rounded-full transition-all duration-200', activeStory === i ? 'w-5 bg-wt-peach' : 'w-2 bg-white/30']"
+              class="min-w-[44px] min-h-[44px] flex items-center justify-center"
               :aria-label="`Story ${i + 1}`"
-            />
+            >
+              <span :class="['h-2 rounded-full block transition-all duration-200', activeStory === i ? 'w-5 bg-wt-peach' : 'w-2 bg-white/30']" />
+            </button>
           </div>
         </div>
 

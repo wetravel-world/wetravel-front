@@ -14,9 +14,18 @@ export function useSeo(meta: () => SeoMeta) {
     document.title = title
 
     setMeta('description', description ?? '')
+    // Open Graph
+    setMeta('og:type', 'website', 'property')
     setMeta('og:title', title, 'property')
     setMeta('og:description', description ?? '', 'property')
     if (image) setMeta('og:image', image, 'property')
+    if (canonical) setMeta('og:url', canonical, 'property')
+    // Twitter / X
+    setMeta('twitter:card', image ? 'summary_large_image' : 'summary')
+    setMeta('twitter:title', title)
+    setMeta('twitter:description', description ?? '')
+    if (image) setMeta('twitter:image', image)
+
     if (canonical) setLink('canonical', canonical)
   })
 }
