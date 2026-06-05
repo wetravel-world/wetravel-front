@@ -5,7 +5,7 @@
         <!-- brand -->
         <div class="max-w-xs">
           <div class="flex items-center mb-3">
-            <img src="/logo.png" alt="WeTravel" class="h-8 w-auto" />
+            <img src="/logo.png" alt="WeTravel" width="40" height="27" class="h-8 w-auto" />
             <span class="font-serif text-xl font-semibold text-white tracking-[-0.3px]">WeTravel</span>
           </div>
           <p class="text-sm leading-relaxed text-[#b8ac9c] m-0">Helping black travellers and mixed-race couples find the places where they belong.</p>
