@@ -1,11 +1,25 @@
+# HTTP → HTTPS
 [[redirects]]
   from = "http://wetravel-world.netlify.app/*"
-  to = "https://wetravel-world.netlify.app/:splat"
+  to   = "https://wetravel-world.netlify.app/:splat"
   status = 301
-  force = true
+  force  = true
 
 [[redirects]]
   from = "http://*"
-  to = "https://:splat"
+  to   = "https://:splat"
   status = 301
-  force = true
+  force  = true
+
+# Proxy /api/* → Railway backend (avoids VITE_API_BASE_URL env issues)
+[[redirects]]
+  from   = "/api/*"
+  to     = "https://wetravel-back-production.up.railway.app/api/:splat"
+  status = 200
+  force  = true
+
+# SPA fallback — required for Vue Router (history mode)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
