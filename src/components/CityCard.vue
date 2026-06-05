@@ -7,6 +7,8 @@
         <img
           v-if="city.hero_image_url"
           :src="imageUrl"
+          :srcset="imageSrcset"
+          sizes="(min-width: 1024px) 400px, (min-width: 768px) calc(50vw - 48px), calc(100vw - 32px)"
           :alt="`${city.name}, ${city.country}`"
           width="800"
           height="450"
@@ -58,20 +60,30 @@ const color = computed(() => scoreColor(numScore.value))
 const tone = computed(() => TONES[(props.index ?? 0) % TONES.length])
 const isFirst = computed(() => (props.index ?? 0) === 0)
 
+function unsplashUrl(base: string, w: number): string {
+  const u = new URL(base)
+  u.searchParams.set('fm', 'webp')
+  u.searchParams.set('q', '80')
+  u.searchParams.set('w', String(w))
+  return u.toString()
+}
+
 const imageUrl = computed(() => {
   const url = props.city.hero_image_url
   if (!url) return ''
   if (url.includes('images.unsplash.com')) {
-    try {
-      const u = new URL(url)
-      u.searchParams.set('fm', 'webp')
-      u.searchParams.set('q', '80')
-      u.searchParams.set('w', '800')
-      return u.toString()
-    } catch {
-      return url
-    }
+    try { return unsplashUrl(url, 800) } catch { return url }
   }
   return url
+})
+
+const imageSrcset = computed(() => {
+  const url = props.city.hero_image_url
+  if (!url?.includes('images.unsplash.com')) return undefined
+  try {
+    return [400, 800].map(w => `${unsplashUrl(url, w)} ${w}w`).join(', ')
+  } catch {
+    return undefined
+  }
 })
 </script>

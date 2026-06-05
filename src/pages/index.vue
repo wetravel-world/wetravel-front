@@ -22,12 +22,16 @@
         <!-- mobile hero image — visible only on mobile, matches preload in <head> for fast LCP -->
         <div class="md:hidden mt-5 -mx-4 overflow-hidden rounded-none">
           <picture>
-            <source srcset="/home/rome.webp" type="image/webp" />
+            <!-- Netlify Image CDN serves rome at correct mobile width (~25KB vs 92KB full) -->
+            <source
+              :srcset="mobileHeroSrcset"
+              sizes="100vw"
+              type="image/webp" />
             <img
               src="/home/rome.jpg"
               alt="Rome — a welcoming destination"
-              width="800"
-              height="400"
+              width="412"
+              height="180"
               fetchpriority="high"
               decoding="sync"
               class="w-full h-[180px] object-cover"
@@ -224,6 +228,11 @@ import CityCard from '@/components/CityCard.vue'
 
 const router = useRouter()
 const store = useCitiesStore()
+
+// Netlify Image CDN resizes rome.webp to the correct mobile width at the CDN edge.
+// Must be a JS constant (not a static HTML attribute) so Vite doesn't try to resolve
+// the /.netlify/images path as a local static asset.
+const mobileHeroSrcset = '/.netlify/images?url=%2Fhome%2Frome.webp&w=412&format=webp&q=80 412w, /.netlify/images?url=%2Fhome%2Frome.webp&w=824&format=webp&q=80 824w'
 
 useSeo(() => ({
   title: 'WeTravel — Travel like you belong everywhere',

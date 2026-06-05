@@ -21,8 +21,14 @@
     <meta name="twitter:title" content="WeTravel — Safety Guide for black &amp; mixed-race travelers" />
     <meta name="twitter:description" content="Welcome scores and real reviews for mixed-race couples, black travellers and diasporas. Find out how welcome you'll feel in any city worldwide." />
     <meta name="twitter:image" content="https://we-travel.world/home/rome.webp" />
-    <!-- preload LCP hero image so browser discovers it before JS runs -->
-    <link rel="preload" as="image" href="/home/rome.webp" fetchpriority="high" type="image/webp" />
+    <!-- preload LCP hero: desktop collage uses full-res, mobile uses CDN-resized 412px version -->
+    <link rel="preload" as="image" href="/home/rome.webp" fetchpriority="high" type="image/webp" media="(min-width: 768px)" />
+    <link rel="preload" as="image"
+      href="/.netlify/images?url=%2Fhome%2Frome.webp&w=412&format=webp&q=80"
+      imagesrcset="/.netlify/images?url=%2Fhome%2Frome.webp&w=412&format=webp&q=80 412w, /.netlify/images?url=%2Fhome%2Frome.webp&w=824&format=webp&q=80 824w"
+      imagesizes="100vw"
+      fetchpriority="high"
+      media="(max-width: 767px)" />
     <!-- preconnect critical third-party origins -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
