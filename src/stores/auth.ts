@@ -26,8 +26,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function register(payload: { username: string; email: string; password: string }) {
-    const { data } = await api.post('/auth/register/', payload)
-    user.value = data
+    await api.post('/auth/register/', payload)
+    // Account created but unverified — no session set yet
   }
 
   async function login(payload: { email: string; password: string }) {

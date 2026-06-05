@@ -30,7 +30,12 @@
               :class="errors.password ? 'border-red-400' : 'border-wt-line'" />
             <span v-if="errors.password" class="block text-[12.5px] text-red-500 mt-1.5">{{ errors.password }}</span>
           </label>
-          <p v-if="serverError" class="text-[12.5px] text-red-500 mb-3">{{ serverError }}</p>
+          <div v-if="serverError" class="mb-3">
+          <p class="text-[12.5px] text-red-500 m-0">{{ serverError }}</p>
+          <p v-if="notVerified" class="text-[12.5px] text-wt-sub m-0 mt-1">
+            <RouterLink to="/auth/register" class="text-wt-coral font-semibold no-underline">Resend verification email →</RouterLink>
+          </p>
+        </div>
           <button type="submit" class="w-full bg-wt-coral text-white border-0 rounded-[13px] py-[15px] font-extrabold text-[16px] cursor-pointer mt-1">Log in</button>
           <p class="text-center text-[14px] text-wt-sub mt-[18px]">New to WeTravel? <RouterLink to="/auth/register" class="text-wt-coral font-bold no-underline">Create an account</RouterLink></p>
         </form>
@@ -69,6 +74,7 @@ const email = ref('')
 const password = ref('')
 const errors = ref<{ email?: string; password?: string }>({})
 const serverError = ref('')
+const notVerified = ref(false)
 const router = useRouter()
 const route = useRoute()
 const auth = useAuthStore()
@@ -76,6 +82,7 @@ const auth = useAuthStore()
 async function submit() {
   errors.value = {}
   serverError.value = ''
+  notVerified.value = false
   if (!email.value.includes('@')) { errors.value.email = 'Enter a valid email address.'; }
   if (!password.value) { errors.value.password = 'Enter your password.'; }
   if (Object.keys(errors.value).length) return
@@ -84,7 +91,13 @@ async function submit() {
     const redirect = (route.query.redirect as string) || '/'
     router.push(redirect)
   } catch (e: any) {
-    serverError.value = e?.response?.data?.detail ?? 'Login failed.'
+    const data = e?.response?.data
+    if (data?.code === 'email_not_verified') {
+      notVerified.value = true
+      serverError.value = data.detail
+    } else {
+      serverError.value = data?.detail ?? 'Login failed.'
+    }
   }
 }
 </script>

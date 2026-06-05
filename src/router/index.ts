@@ -10,6 +10,7 @@ const router = createRouter({
     { path: '/auth/login', component: () => import('@/pages/auth/login.vue'), meta: { hideLayout: true } },
     { path: '/auth/register', component: () => import('@/pages/auth/register.vue'), meta: { hideLayout: true } },
     { path: '/auth/google/callback', component: () => import('@/pages/auth/google-callback.vue'), meta: { hideLayout: true } },
+    { path: '/auth/verify-email', component: () => import('@/pages/auth/verify-email.vue'), meta: { hideLayout: true } },
     {
       path: '/profile',
       component: () => import('@/pages/profile.vue'),
