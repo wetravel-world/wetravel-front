@@ -19,26 +19,6 @@
         </span>
         <SearchBar @select="goToCity" />
 
-        <!-- mobile hero image — visible only on mobile, matches preload in <head> for fast LCP -->
-        <div class="md:hidden mt-5 -mx-4 overflow-hidden rounded-none">
-          <picture>
-            <!-- Netlify Image CDN serves rome at correct mobile width (~25KB vs 92KB full) -->
-            <source
-              :srcset="mobileHeroSrcset"
-              sizes="100vw"
-              type="image/webp" />
-            <img
-              src="/home/rome.jpg"
-              alt="Rome — a welcoming destination"
-              width="412"
-              height="180"
-              fetchpriority="high"
-              decoding="sync"
-              class="w-full h-[180px] object-cover"
-            />
-          </picture>
-        </div>
-
         <div class="flex flex-wrap gap-4 mt-6 text-sm text-wt-sub">
           <span class="inline-flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e9663e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
