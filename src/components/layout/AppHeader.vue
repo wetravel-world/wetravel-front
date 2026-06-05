@@ -3,7 +3,7 @@
     <nav class="flex items-center justify-between px-4 md:px-14 py-4 md:py-5 max-w-[1300px] mx-auto">
       <!-- logo -->
       <RouterLink to="/" class="flex items-center gap-2 no-underline">
-        <img src="/logo.png" alt="WeTravel" class="h-8 md:h-[3.2vw] max-h-10 w-auto" />
+        <img src="/logo.png" alt="WeTravel" width="40" height="40" class="h-8 md:h-[3.2vw] max-h-10 w-auto" />
         <span class="-ml-3 font-serif text-xl font-semibold text-wt-ink tracking-[-0.3px]">WeTravel</span>
       </RouterLink>
 

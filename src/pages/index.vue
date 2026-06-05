@@ -37,16 +37,29 @@
       <!-- photo collage — hidden on mobile -->
       <div class="hidden md:grid grid-cols-2 gap-3.5 [grid-template-rows:15vh_15vh_15vh]">
         <div class="[grid-row:1/span_2] rounded-[20px] overflow-hidden">
-          <img src="/home/bahamas.jpg" alt="Bahamas" class="w-full h-full object-cover block" />
+          <picture>
+            <source srcset="/home/bahamas.webp" type="image/webp" />
+            <img src="/home/bahamas.jpg" alt="Bahamas" width="1200" height="900" loading="lazy" decoding="async" class="w-full h-full object-cover block" />
+          </picture>
         </div>
         <div class="rounded-[20px] overflow-hidden">
-          <img src="/home/paris.jpg" alt="Paris" class="w-full h-full object-cover block" />
+          <picture>
+            <source srcset="/home/paris.webp" type="image/webp" />
+            <img src="/home/paris.jpg" alt="Paris" width="1200" height="900" loading="lazy" decoding="async" class="w-full h-full object-cover block" />
+          </picture>
         </div>
         <div class="[grid-row:2/span_2] rounded-[20px] overflow-hidden">
-          <img src="/home/rome.jpg" alt="Rome" class="w-full h-full object-cover block" />
+          <!-- LCP image: high priority, no lazy load, WebP first -->
+          <picture>
+            <source srcset="/home/rome.webp" type="image/webp" />
+            <img src="/home/rome.jpg" alt="Rome" width="1400" height="933" fetchpriority="high" decoding="sync" class="w-full h-full object-cover block" />
+          </picture>
         </div>
         <div class="rounded-[20px] overflow-hidden">
-          <img src="/home/korea.jpg" alt="Korea" class="w-full h-full object-cover block" />
+          <picture>
+            <source srcset="/home/korea.webp" type="image/webp" />
+            <img src="/home/korea.jpg" alt="Korea" width="1200" height="802" loading="lazy" decoding="async" class="w-full h-full object-cover block" />
+          </picture>
         </div>
       </div>
     </section>
