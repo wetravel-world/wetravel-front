@@ -80,9 +80,17 @@
             >
               <!-- thumbnail -->
               <div class="relative w-28 md:w-32 flex-shrink-0">
-                <div v-if="city.hero_image_url"
-                  class="w-full h-full bg-cover bg-center"
-                  :style="`background-image:url(${city.hero_image_url})`" />
+                <img
+                  v-if="city.hero_image_url"
+                  :src="thumbUrl(city.hero_image_url)"
+                  :alt="`${city.name}, ${city.country}`"
+                  class="w-full h-full object-cover block"
+                  :loading="i === 0 ? 'eager' : 'lazy'"
+                  :fetchpriority="i === 0 ? 'high' : 'auto'"
+                  decoding="async"
+                  width="128"
+                  height="96"
+                />
                 <div v-else class="w-full h-full" :style="`background:${tones[i % tones.length]}22`" />
                 <div class="absolute top-2 left-2 bg-white rounded-lg px-1.5 py-1 flex items-center gap-1 shadow-[0_3px_10px_rgba(0,0,0,0.16)]">
                   <span class="w-2 h-2 rounded-full" :style="`background:${scoreColor(parseFloat(city.welcome_score)).main}`" />
@@ -171,6 +179,19 @@ const sortBy = ref('score')
 const sentinel = ref<HTMLElement | null>(null)
 
 const continents = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Middle East', 'Oceania']
+
+function thumbUrl(url: string): string {
+  if (!url?.includes('images.unsplash.com')) return url
+  try {
+    const u = new URL(url)
+    u.searchParams.set('fm', 'webp')
+    u.searchParams.set('q', '70')
+    u.searchParams.set('w', '320')
+    return u.toString()
+  } catch {
+    return url
+  }
+}
 
 const sorted = computed(() => {
   const list = [...store.cities]
