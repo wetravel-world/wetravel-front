@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -43,23 +43,23 @@ declare global {
       accounts: {
         id: {
           initialize: (config: object) => void
-          prompt: () => void
+          prompt: (callback?: (notification: PromptNotification) => void) => void
           cancel: () => void
+          renderButton: (parent: HTMLElement, options: object) => void
         }
       }
     }
   }
+  interface PromptNotification {
+    isDisplayed: () => boolean
+    isNotDisplayed: () => boolean
+    isSkippedMoment: () => boolean
+    isDismissedMoment: () => boolean
+    getNotDisplayedReason: () => string
+    getSkippedReason: () => string
+    getDismissedReason: () => string
+  }
 }
-
-onMounted(() => {
-  if (!CLIENT_ID || !window.google) return
-  window.google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: handleCredentialResponse,
-    auto_select: false,
-    cancel_on_tap_outside: true,
-  })
-})
 
 async function handleCredentialResponse(response: { credential: string }) {
   loading.value = true
@@ -69,20 +69,70 @@ async function handleCredentialResponse(response: { credential: string }) {
     router.push(props.redirect ?? '/')
   } catch (e: any) {
     error.value = e?.response?.data?.detail ?? 'Google sign-in failed. Please try again.'
-  } finally {
     loading.value = false
   }
 }
 
+function initializeGIS() {
+  window.google!.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: handleCredentialResponse,
+    auto_select: false,
+    cancel_on_tap_outside: true,
+    context: 'signin',
+  })
+}
+
 function handleClick() {
+  error.value = ''
+
   if (!CLIENT_ID) {
     error.value = 'Google sign-in is not configured.'
     return
   }
+
   if (!window.google) {
-    error.value = 'Google script not loaded. Please refresh the page.'
+    // Script not loaded yet — try waiting a moment then retry
+    loading.value = true
+    const maxWait = 3000
+    const start = Date.now()
+    const poll = setInterval(() => {
+      if (window.google) {
+        clearInterval(poll)
+        loading.value = false
+        triggerPrompt()
+      } else if (Date.now() - start > maxWait) {
+        clearInterval(poll)
+        loading.value = false
+        error.value = 'Google script failed to load. Please refresh the page.'
+      }
+    }, 100)
     return
   }
-  window.google.accounts.id.prompt()
+
+  triggerPrompt()
+}
+
+function triggerPrompt() {
+  // Always (re-)initialize before prompting so the callback is always registered,
+  // regardless of whether onMounted ran before the script loaded.
+  initializeGIS()
+
+  window.google!.accounts.id.prompt((notification) => {
+    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+      // One Tap was suppressed (Firefox ETP, Safari ITP, ad blockers…)
+      // Fall back to the backend redirect OAuth flow
+      const reason = notification.isNotDisplayed()
+        ? notification.getNotDisplayedReason()
+        : notification.getSkippedReason()
+
+      // Suppressions like 'browser_not_supported' or 'third_party_cookies_blocked'
+      // → redirect to backend's allauth Google URL
+      if (['browser_not_supported', 'third_party_cookies_blocked', 'opt_out_or_no_session'].includes(reason)) {
+        window.location.href = '/api/auth/google/redirect/'
+      }
+      // For other suppressions (user closed, etc.) do nothing
+    }
+  })
 }
 </script>
