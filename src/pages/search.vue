@@ -30,7 +30,7 @@
             :key="c"
             @click="selectContinent(c)"
             :class="['border-2 rounded-full px-3.5 py-1.5 font-semibold text-[13px] cursor-pointer transition-all duration-150',
-              activeContinent === c ? 'border-wt-coral bg-wt-coral text-white' : 'border-wt-line bg-white text-wt-ink']">
+              activeContinent === c ? 'border-wt-coral-aa bg-wt-coral-aa text-white' : 'border-wt-line bg-white text-wt-ink']">
             {{ c }}
           </button>
         </div>
@@ -39,7 +39,7 @@
           <span class="text-[13px] text-wt-sub">
             <strong class="text-wt-ink">{{ store.total }}</strong> {{ store.total === 1 ? 'city' : 'cities' }}<span v-if="query"> for "{{ query }}"</span>
           </span>
-          <select v-model="sortBy" @change="resort"
+          <select v-model="sortBy" @change="resort" aria-label="Sort cities by"
             class="border border-wt-line bg-white rounded-xl px-3 py-2 text-[13.5px] text-wt-ink font-semibold cursor-pointer outline-none">
             <option value="score">Welcome score</option>
             <option value="name">Name (A–Z)</option>
