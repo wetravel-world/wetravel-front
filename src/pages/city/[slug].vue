@@ -12,8 +12,18 @@
           class="w-full h-52 sm:h-72 md:h-[340px] rounded-2xl overflow-hidden relative"
           :style="`background:${scoreColor(numScore).main}1f`"
         >
-          <img v-if="city.hero_image_url" :src="city.hero_image_url" :alt="city.name"
-            class="w-full h-full object-cover" />
+          <img
+            v-if="city.hero_image_url"
+            :src="heroUrl(city.hero_image_url, 1200)"
+            :srcset="heroSrcset(city.hero_image_url)"
+            sizes="(min-width: 1180px) 1180px, 100vw"
+            :alt="city.name"
+            class="w-full h-full object-cover"
+            fetchpriority="high"
+            decoding="sync"
+            width="1180"
+            height="340"
+          />
           <div v-else class="w-full h-full bg-[rgba(30,110,140,0.12)]" />
           <div class="absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(20,12,6,0)_30%,rgba(20,12,6,0.7))]" />
         </div>
@@ -152,6 +162,24 @@ const route = useRoute()
 const store = useCitiesStore()
 const city = computed(() => store.current)
 const numScore = computed(() => city.value ? parseFloat(city.value.welcome_score) : 0)
+
+function heroUrl(url: string, w: number): string {
+  if (!url?.includes('images.unsplash.com')) return url
+  try {
+    const u = new URL(url)
+    u.searchParams.set('fm', 'webp')
+    u.searchParams.set('q', '80')
+    u.searchParams.set('w', String(w))
+    return u.toString()
+  } catch { return url }
+}
+
+function heroSrcset(url: string): string | undefined {
+  if (!url?.includes('images.unsplash.com')) return undefined
+  try {
+    return [480, 800, 1200].map(w => `${heroUrl(url, w)} ${w}w`).join(', ')
+  } catch { return undefined }
+}
 
 onMounted(() => store.fetchCity(route.params.slug as string))
 

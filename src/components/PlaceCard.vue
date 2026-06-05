@@ -2,7 +2,8 @@
   <div class="bg-white rounded-2xl overflow-hidden shadow-sm flex flex-row sm:flex-col">
     <!-- image -->
     <div class="w-28 sm:w-full h-auto sm:h-36 flex-shrink-0">
-      <img v-if="place.image_url" :src="place.image_url" :alt="place.name" loading="lazy"
+      <img v-if="place.image_url" :src="placeImgUrl(place.image_url)" :alt="place.name" loading="lazy"
+        decoding="async" width="480" height="144"
         class="w-full h-full object-cover min-h-[100px]" />
       <div v-else class="w-full h-full bg-wt-line min-h-[100px]" />
     </div>
@@ -19,4 +20,15 @@
 <script setup lang="ts">
 import type { Place } from '@/stores/cities'
 defineProps<{ place: Place }>()
+
+function placeImgUrl(url: string): string {
+  if (!url?.includes('images.unsplash.com')) return url
+  try {
+    const u = new URL(url)
+    u.searchParams.set('fm', 'webp')
+    u.searchParams.set('q', '75')
+    u.searchParams.set('w', '480')
+    return u.toString()
+  } catch { return url }
+}
 </script>

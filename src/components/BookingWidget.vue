@@ -3,7 +3,7 @@
     <div class="px-5 pt-5 pb-0">
       <div class="flex items-center gap-2 mb-1">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e9663e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8M3 12h18a0 0 0 0 1 0 0v6M3 12V9a2 2 0 0 1 2-2h7v5M21 18v-3"/></svg>
-        <h3 class="font-serif text-xl font-semibold m-0">Book a vetted stay</h3>
+        <h2 class="font-serif text-xl font-semibold m-0">Book a vetted stay</h2>
       </div>
       <p class="text-[13px] text-wt-sub m-0 mb-4">Places personally checked as welcoming.</p>
     </div>
