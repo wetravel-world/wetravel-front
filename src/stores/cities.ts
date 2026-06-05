@@ -11,6 +11,8 @@ export interface City {
   welcome_score: string
   score_count: number
   hero_image_url: string
+  latitude?: string
+  longitude?: string
   description?: string
   meta_description?: string
   places?: Place[]
