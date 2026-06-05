@@ -33,7 +33,7 @@ onMounted(async () => {
     const { data } = await api.get('/booking/search/', { params: { city: props.citySlug } })
     bookingUrl.value = data.booking_url
   } catch {
-    bookingUrl.value = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(props.cityName)}`
+    bookingUrl.value = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(props.cityName)}&utm_source=wetravel&utm_medium=city_page&utm_campaign=${props.citySlug}`
   }
 })
 </script>
