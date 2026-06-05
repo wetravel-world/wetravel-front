@@ -159,6 +159,6 @@ useSeo(() => ({
   title: city.value ? `Is ${city.value.name} welcoming for Black travelers? — WeTravel` : 'WeTravel',
   description: city.value?.meta_description ?? city.value?.description ?? '',
   image: city.value?.hero_image_url,
-  canonical: `https://wetravel.app/city/${route.params.slug}`,
+  canonical: `https://we-travel.world/city/${route.params.slug}`,
 }))
 </script>

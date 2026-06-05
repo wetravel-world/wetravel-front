@@ -209,6 +209,7 @@ const store = useCitiesStore()
 useSeo(() => ({
   title: 'WeTravel — Travel like you belong everywhere',
   description: "Welcome scores and real reviews for mixed-race couples, black travellers and diasporas. Find out how welcome you'll feel in any city.",
+  canonical: 'https://we-travel.world/',
 }))
 
 onMounted(() => store.search(''))

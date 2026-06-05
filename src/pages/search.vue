@@ -153,6 +153,13 @@ import { useRoute } from 'vue-router'
 import { useCitiesStore } from '@/stores/cities'
 import { scoreColor, scoreLabel, TONES } from '@/composables/useScore'
 import { trackSiteSearch } from '@/composables/useMatomo'
+import { useSeo } from '@/composables/useSeo'
+
+useSeo(() => ({
+  title: 'Explore cities — WeTravel',
+  description: 'Search and filter cities worldwide by welcome score for black travellers, mixed-race couples and the African diaspora.',
+  canonical: 'https://we-travel.world/search',
+}))
 
 const route = useRoute()
 const store = useCitiesStore()
