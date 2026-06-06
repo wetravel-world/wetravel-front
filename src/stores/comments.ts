@@ -14,6 +14,7 @@ export interface Comment {
   id: number
   author_username: string
   author_avatar_url: string
+  author_stamps: string[]
   body: string
   score: number
   created_at: string

@@ -54,6 +54,39 @@
         </div>
       </div>
 
+      <!-- stamps collection -->
+      <template v-if="activity?.commented_cities?.length">
+        <h2 class="font-serif text-[22px] font-semibold text-wt-ink mb-4 tracking-[-0.3px]">Stamps collected</h2>
+        <div class="bg-white rounded-2xl border border-wt-line shadow-sm px-6 py-5 mb-8">
+          <div
+            class="flex flex-wrap gap-x-3 gap-y-4 transition-all duration-300"
+            :class="stampsExpanded ? '' : 'max-h-[320px] overflow-hidden'"
+          >
+            <div
+              v-for="(city, i) in activity.commented_cities"
+              :key="city.slug"
+              class="group relative flex flex-col items-center gap-1 cursor-default"
+            >
+              <img
+                :src="`${apiBase}/static/img/stamps/${city.slug}.png`"
+                :alt="city.name"
+                :style="{ transform: `rotate(${STAMP_TILTS[i % STAMP_TILTS.length]}deg)` }"
+                class="w-32 h-32 object-contain transition-transform duration-150 group-hover:scale-110"
+              />
+              <span class="text-[10.5px] text-wt-sub text-center leading-tight max-w-[128px] truncate">{{ city.name }}</span>
+            </div>
+          </div>
+          <button
+            v-if="!stampsExpanded && activity.commented_cities.length > 4"
+            @click="stampsExpanded = true"
+            class="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-wt-line text-[13.5px] font-semibold text-wt-ink hover:bg-wt-bg transition"
+          >
+            See all {{ activity.commented_cities.length }} stamps
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+      </template>
+
       <!-- commented places -->
       <h2 class="font-serif text-[22px] font-semibold text-wt-ink mb-4 tracking-[-0.3px]">Commented places</h2>
 
@@ -107,6 +140,9 @@ const auth = useAuthStore()
 const router = useRouter()
 const activity = ref<Activity | null>(null)
 const loading = ref(true)
+const stampsExpanded = ref(false)
+const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
+const STAMP_TILTS = [-4, 3, -2, 5, -3, 2, -6, 4, -1, 3, -5, 2, -3, 4, -2, 1]
 
 onMounted(async () => {
   try {

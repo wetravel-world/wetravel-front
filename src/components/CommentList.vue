@@ -6,21 +6,45 @@
       <div
         v-for="comment in visibleComments"
         :key="comment.id"
-        class="bg-white rounded-2xl shadow-[0_1px_3px_rgba(42,32,24,0.06)] overflow-hidden"
+        class="bg-white rounded-2xl shadow-[0_1px_3px_rgba(42,32,24,0.06)] relative z-10 hover:z-30"
       >
         <!-- comment body -->
         <div class="p-5">
           <div class="flex items-center gap-3 mb-3">
-            <!-- avatar -->
-            <img
-              v-if="comment.author_avatar_url"
-              :src="comment.author_avatar_url"
-              :alt="comment.author_username"
-              class="w-10 h-10 rounded-full object-cover flex-shrink-0"
-            />
-            <span v-else class="w-10 h-10 rounded-full bg-wt-coral/20 flex items-center justify-center font-bold text-wt-coral text-[15px] flex-shrink-0">
-              {{ (comment.author_username || 'U')[0].toUpperCase() }}
-            </span>
+            <!-- avatar with stamp popover -->
+            <div class="relative flex-shrink-0 group/avatar">
+              <img
+                v-if="comment.author_avatar_url"
+                :src="comment.author_avatar_url"
+                :alt="comment.author_username"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <span v-else class="w-10 h-10 rounded-full bg-wt-coral/20 flex items-center justify-center font-bold text-wt-coral text-[15px]">
+                {{ (comment.author_username || 'U')[0].toUpperCase() }}
+              </span>
+              <!-- stamp popover -->
+              <div
+                v-if="comment.author_stamps?.length"
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-20 pointer-events-none
+                       opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-150"
+              >
+                <div class="bg-white border border-wt-line rounded-2xl shadow-lg px-4 py-3 w-[25vw]">
+                  <p class="text-[11px] font-semibold text-wt-sub uppercase tracking-wide mb-2.5">Stamps collected</p>
+                  <div class="flex flex-wrap justify-center">
+                    <img
+                      v-for="(slug, i) in comment.author_stamps"
+                      :key="slug"
+                      :src="`${apiBase}/static/img/stamps/${slug}.png`"
+                      :title="slug.replace(/-/g, ' ')"
+                      :style="{ transform: `rotate(${TILTS[i % TILTS.length]}deg)` }"
+                      class="w-[5vw] h-[5vw] object-contain"
+                    />
+                  </div>
+                </div>
+                <!-- arrow -->
+                <div class="w-2.5 h-2.5 bg-white border-b border-r border-wt-line rotate-45 mx-auto -mt-1.5" />
+              </div>
+            </div>
 
             <div class="flex-1 min-w-0">
               <div class="font-semibold text-[14.5px] text-wt-ink">{{ comment.author_username }}</div>
@@ -78,7 +102,7 @@
         </div>
 
         <!-- replies section -->
-        <div v-if="openReplies.has(comment.id)" class="border-t border-wt-line bg-wt-bg px-5 py-4 flex flex-col gap-3">
+        <div v-if="openReplies.has(comment.id)" class="border-t border-wt-line bg-wt-bg px-5 py-4 flex flex-col gap-3 rounded-b-2xl">
 
           <!-- existing replies -->
           <div
@@ -183,6 +207,8 @@ import { useCommentsStore } from '@/stores/comments'
 import { useAuthStore } from '@/stores/auth'
 
 const props = defineProps<{ citySlug: string; collapsed?: boolean }>()
+const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
+const TILTS = [-4, 3, -2, 5, -3, 2, -6, 4, -1, 3, -5, 2, -3, 4, -2, 1]
 const store = useCommentsStore()
 const auth = useAuthStore()
 
