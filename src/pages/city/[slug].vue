@@ -82,7 +82,7 @@
           <strong>Is {{ city.name }} safe for black travellers?</strong> {{ city.description }}
         </p>
         <p class="text-[15px] leading-relaxed text-wt-sub mb-8">
-          Our {{ numScore.toFixed(1) }}/10 welcome score blends editorial research, official data and {{ city.score_count }} reviews from mixed-race couples, black travellers and diasporas who've been to {{ city.name }}.
+          Our {{ numScore.toFixed(1) }}/10 welcome score blends editorial research, official data and {{ city.score_count }} reviews from mixed-race couples, black travellers and travelers of color who've been to {{ city.name }}.
         </p>
 
         <!-- booking widget — mobile only (appears early in flow) -->

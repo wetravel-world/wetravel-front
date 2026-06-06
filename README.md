@@ -1,6 +1,6 @@
 # wetravel-front
 
-Vue 3 frontend for [WeTravel](https://wetravel.app) — a safety & welcome guide for Black travelers, African diaspora, and mixed-race couples.
+Vue 3 frontend for [WeTravel](https://we-travel.world) — a safety & welcome guide for Black travelers and mixed-race couples.
 
 ## Tech stack
 

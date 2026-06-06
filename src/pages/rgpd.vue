@@ -3,24 +3,24 @@
     <div class="max-w-3xl mx-auto px-4 py-10 md:py-16">
 
       <h1 class="font-serif text-[32px] md:text-[40px] font-semibold text-wt-ink tracking-[-0.6px] mb-2">
-        Politique de confidentialité
+        Privacy Policy
       </h1>
-      <p class="text-wt-sub text-[14px] mb-10">Dernière mise à jour : {{ lastUpdated }}</p>
+      <p class="text-wt-sub text-[14px] mb-10">Last updated: {{ lastUpdated }}</p>
 
       <div class="flex flex-col gap-10">
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">1. Responsable du traitement</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">1. Data Controller</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            WeTravel est le responsable du traitement de vos données personnelles au sens du Règlement (UE) 2016/679
-            (RGPD). Pour toute question relative à vos données, vous pouvez nous contacter à l'adresse :
+            WeTravel is the data controller for your personal data within the meaning of Regulation (EU) 2016/679
+            (GDPR). For any questions regarding your data, you can contact us at:
             <a href="mailto:contact@we-travel.world" class="text-wt-coral font-medium no-underline hover:underline">contact@we-travel.world</a>.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">2. Données collectées</h2>
-          <p class="text-[15px] text-wt-sub leading-relaxed mb-4">Nous collectons les données suivantes :</p>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">2. Data We Collect</h2>
+          <p class="text-[15px] text-wt-sub leading-relaxed mb-4">We collect the following data:</p>
           <ul class="flex flex-col gap-2 pl-0 list-none">
             <li v-for="item in dataCollected" :key="item.label" class="flex gap-3 text-[15px] text-wt-sub leading-relaxed">
               <span class="mt-[5px] w-2 h-2 rounded-full bg-wt-coral flex-shrink-0"></span>
@@ -30,13 +30,13 @@
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">3. Finalités et bases légales</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">3. Purposes and Legal Bases</h2>
           <div class="overflow-x-auto rounded-xl border border-wt-line">
             <table class="w-full text-[14px] text-left border-collapse">
               <thead>
                 <tr class="bg-wt-ink text-[#e9e0d4]">
-                  <th class="px-4 py-3 font-semibold rounded-tl-xl">Finalité</th>
-                  <th class="px-4 py-3 font-semibold rounded-tr-xl">Base légale</th>
+                  <th class="px-4 py-3 font-semibold rounded-tl-xl">Purpose</th>
+                  <th class="px-4 py-3 font-semibold rounded-tr-xl">Legal basis</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">4. Durée de conservation</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">4. Retention Periods</h2>
           <ul class="flex flex-col gap-2 pl-0 list-none">
             <li v-for="item in retention" :key="item.label" class="flex gap-3 text-[15px] text-wt-sub leading-relaxed">
               <span class="mt-[5px] w-2 h-2 rounded-full bg-wt-coral flex-shrink-0"></span>
@@ -60,10 +60,10 @@
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">5. Destinataires des données</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">5. Data Recipients</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-3">
-            Vos données ne sont jamais vendues à des tiers. Elles peuvent être partagées avec les sous-traitants
-            suivants dans le strict cadre de la fourniture du service :
+            Your data is never sold to third parties. It may be shared with the following sub-processors
+            strictly within the scope of providing the service:
           </p>
           <ul class="flex flex-col gap-2 pl-0 list-none">
             <li v-for="item in recipients" :key="item.label" class="flex gap-3 text-[15px] text-wt-sub leading-relaxed">
@@ -74,18 +74,18 @@
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">6. Transferts hors UE</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">6. International Transfers</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Certains de nos sous-traitants (ex. : AWS, Google) peuvent transférer des données en dehors de l'Union
-            européenne. Ces transferts sont encadrés par des clauses contractuelles types approuvées par la Commission
-            européenne, conformément à l'article 46 du RGPD.
+            Some of our sub-processors (e.g. AWS, Google) may transfer data outside the European Union.
+            These transfers are governed by standard contractual clauses approved by the European Commission,
+            in accordance with Article 46 of the GDPR.
           </p>
         </section>
 
         <section>
           <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">7. Cookies</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-3">
-            WeTravel utilise des cookies pour les finalités suivantes :
+            WeTravel uses cookies for the following purposes:
           </p>
           <ul class="flex flex-col gap-2 pl-0 list-none">
             <li v-for="item in cookies" :key="item.label" class="flex gap-3 text-[15px] text-wt-sub leading-relaxed">
@@ -94,15 +94,15 @@
             </li>
           </ul>
           <p class="text-[15px] text-wt-sub leading-relaxed mt-3">
-            Vous pouvez configurer votre navigateur pour refuser les cookies. Les cookies strictement nécessaires
-            (authentification) ne peuvent pas être désactivés sans affecter le fonctionnement du service.
+            You can configure your browser to refuse cookies. Strictly necessary cookies
+            (authentication) cannot be disabled without affecting the functionality of the service.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">8. Vos droits</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">8. Your Rights</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-4">
-            Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles :
+            Under the GDPR, you have the following rights over your personal data:
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div v-for="right in rights" :key="right.title"
@@ -112,38 +112,37 @@
             </div>
           </div>
           <p class="text-[15px] text-wt-sub leading-relaxed mt-4">
-            Pour exercer ces droits, envoyez votre demande à
+            To exercise these rights, send your request to
             <a href="mailto:contact@we-travel.world" class="text-wt-coral font-medium no-underline hover:underline">contact@we-travel.world</a>.
-            Nous y répondrons dans un délai d'un mois. En cas de réponse insatisfaisante, vous pouvez introduire une
-            réclamation auprès de la
-            <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" class="text-wt-coral font-medium no-underline hover:underline">CNIL</a>.
+            We will respond within one month. If you are not satisfied with our response, you may lodge a
+            complaint with your local data protection authority.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">9. Sécurité</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">9. Security</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données :
-            chiffrement TLS en transit, mots de passe hachés (bcrypt), tokens JWT à durée de vie courte stockés en
-            cookies <code class="bg-wt-line/50 px-1 rounded text-[13px]">httpOnly</code>, accès restreint aux données
-            de production. En cas de violation de données susceptible d'engendrer un risque pour vos droits, nous vous
-            en informerons dans les 72 heures conformément à l'article 33 du RGPD.
+            We implement appropriate technical and organisational measures to protect your data:
+            TLS encryption in transit, bcrypt-hashed passwords, short-lived JWT tokens stored in
+            <code class="bg-wt-line/50 px-1 rounded text-[13px]">httpOnly</code> cookies, and restricted access to
+            production data. In the event of a data breach likely to create a risk to your rights, we will
+            notify you within 72 hours in accordance with Article 33 of the GDPR.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">10. Modifications</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">10. Changes</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Nous pouvons mettre à jour cette politique à tout moment. La date de dernière mise à jour figurant en haut
-            de cette page sera modifiée en conséquence. En cas de changement substantiel, nous vous en informerons par
-            e-mail ou via une notification dans l'application.
+            We may update this policy at any time. The last updated date shown at the top of this page
+            will be revised accordingly. For any material change, we will notify you by email or via
+            an in-app notification.
           </p>
         </section>
 
         <section class="bg-white rounded-2xl border border-wt-line px-6 py-6">
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-1">Nous contacter</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-1">Contact Us</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-4">
-            Pour toute question concernant cette politique ou vos données personnelles, contactez-nous :
+            For any questions about this policy or your personal data, reach out to us:
           </p>
           <a href="mailto:contact@we-travel.world"
             class="inline-flex items-center gap-2.5 bg-wt-coral text-white no-underline rounded-[13px] px-5 py-3 font-bold text-[15px] hover:opacity-90 transition-opacity">
@@ -160,52 +159,52 @@
 </template>
 
 <script setup lang="ts">
-const lastUpdated = 'juin 2026'
+const lastUpdated = 'June 2026'
 
 const dataCollected = [
-  { label: "Données de compte", desc: "nom d'utilisateur, adresse e-mail, mot de passe haché — lors de l'inscription." },
-  { label: "Données de connexion sociale", desc: "nom, e-mail et photo de profil Google — uniquement si vous choisissez la connexion Google." },
-  { label: "Avis et scores", desc: "texte de votre commentaire et score de bienvenue que vous soumettez pour une ville." },
-  { label: "Données de navigation", desc: "pages visitées, durée de session, pays d'origine — collectées via Matomo, hébergé par nos soins." },
-  { label: "Données techniques", desc: "adresse IP, type de navigateur, horodatages — conservées dans les journaux serveur." },
+  { label: "Account data", desc: "username, email address, hashed password — collected at registration." },
+  { label: "Social login data", desc: "name, email, and Google profile photo — only if you choose to sign in with Google." },
+  { label: "Reviews & scores", desc: "the text of your review and the welcome score you submit for a city." },
+  { label: "Browsing data", desc: "pages visited, session duration, country of origin — collected via self-hosted Matomo." },
+  { label: "Technical data", desc: "IP address, browser type, timestamps — retained in server logs." },
 ]
 
 const legalBases = [
-  { purpose: "Création et gestion de votre compte", basis: "Exécution du contrat (art. 6.1.b)" },
-  { purpose: "Authentification et sécurité", basis: "Intérêt légitime (art. 6.1.f)" },
-  { purpose: "Publication de vos avis", basis: "Exécution du contrat (art. 6.1.b)" },
-  { purpose: "Analyse d'audience (Matomo)", basis: "Intérêt légitime (art. 6.1.f) — données anonymisées" },
-  { purpose: "Envoi d'e-mails transactionnels", basis: "Exécution du contrat (art. 6.1.b)" },
-  { purpose: "Respect des obligations légales", basis: "Obligation légale (art. 6.1.c)" },
+  { purpose: "Account creation and management", basis: "Performance of contract (Art. 6.1.b)" },
+  { purpose: "Authentication and security", basis: "Legitimate interest (Art. 6.1.f)" },
+  { purpose: "Publishing your reviews", basis: "Performance of contract (Art. 6.1.b)" },
+  { purpose: "Audience analytics (Matomo)", basis: "Legitimate interest (Art. 6.1.f) — anonymised data" },
+  { purpose: "Sending transactional emails", basis: "Performance of contract (Art. 6.1.b)" },
+  { purpose: "Compliance with legal obligations", basis: "Legal obligation (Art. 6.1.c)" },
 ]
 
 const retention = [
-  { label: "Données de compte actif", desc: "conservées pendant toute la durée d'activité du compte." },
-  { label: "Données après suppression du compte", desc: "supprimées sous 30 jours, sauf obligation légale contraire." },
-  { label: "Avis publiés", desc: "anonymisés (nom d'utilisateur remplacé par 'Utilisateur supprimé') après suppression du compte." },
-  { label: "Journaux serveur", desc: "conservés 12 mois à des fins de sécurité." },
-  { label: "Données d'analyse Matomo", desc: "conservées 13 mois glissants." },
+  { label: "Active account data", desc: "retained for the duration of the account." },
+  { label: "Data after account deletion", desc: "deleted within 30 days, unless a legal obligation requires otherwise." },
+  { label: "Published reviews", desc: "anonymised (username replaced with 'Deleted user') after account deletion." },
+  { label: "Server logs", desc: "retained for 12 months for security purposes." },
+  { label: "Matomo analytics data", desc: "retained for a rolling 13-month period." },
 ]
 
 const recipients = [
-  { label: "Hébergeur cloud (AWS / Cloudflare)", desc: "stockage des données et des images." },
-  { label: "Google OAuth2", desc: "authentification sociale uniquement si vous y consentez." },
-  { label: "Matomo (auto-hébergé)", desc: "analyse d'audience, sans transfert vers des tiers." },
-  { label: "Booking.com", desc: "les clics sur les liens d'affiliation transmettent un identifiant de session anonyme." },
+  { label: "Cloud host (AWS / Cloudflare)", desc: "storage of data and images." },
+  { label: "Google OAuth2", desc: "social authentication, only if you consent." },
+  { label: "Matomo (self-hosted)", desc: "audience analytics, no data transferred to third parties." },
+  { label: "Booking.com", desc: "clicks on affiliate links transmit an anonymous session identifier." },
 ]
 
 const cookies = [
-  { label: "Authentification", desc: "cookie httpOnly contenant votre token JWT — strictement nécessaire." },
-  { label: "Préférences", desc: "langue, thème — stockés en localStorage, pas de date d'expiration." },
-  { label: "Analyse (Matomo)", desc: "cookie _pk_id / _pk_ses pour mesurer l'audience — anonymisé, aucun partage tiers." },
+  { label: "Authentication", desc: "httpOnly cookie containing your JWT token — strictly necessary." },
+  { label: "Preferences", desc: "language, theme — stored in localStorage, no expiry date." },
+  { label: "Analytics (Matomo)", desc: "_pk_id / _pk_ses cookies to measure traffic — anonymised, no third-party sharing." },
 ]
 
 const rights = [
-  { title: "Droit d'accès", desc: "Obtenir une copie de toutes les données que nous détenons sur vous." },
-  { title: "Droit de rectification", desc: "Corriger des données inexactes ou incomplètes." },
-  { title: "Droit à l'effacement", desc: "Demander la suppression de votre compte et de vos données." },
-  { title: "Droit à la portabilité", desc: "Recevoir vos données dans un format structuré et lisible par machine." },
-  { title: "Droit d'opposition", desc: "Vous opposer à un traitement fondé sur l'intérêt légitime." },
-  { title: "Droit à la limitation", desc: "Demander la suspension du traitement de vos données." },
+  { title: "Right of access", desc: "Obtain a copy of all data we hold about you." },
+  { title: "Right to rectification", desc: "Correct inaccurate or incomplete data." },
+  { title: "Right to erasure", desc: "Request deletion of your account and data." },
+  { title: "Right to portability", desc: "Receive your data in a structured, machine-readable format." },
+  { title: "Right to object", desc: "Object to processing based on legitimate interest." },
+  { title: "Right to restriction", desc: "Request that processing of your data be suspended." },
 ]
 </script>

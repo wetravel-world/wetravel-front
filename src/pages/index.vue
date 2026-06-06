@@ -14,7 +14,7 @@
             <span class="text-wt-coral italic">travel safely.</span>
           </h1>
           <p class="text-[16px] md:text-[18px] leading-relaxed text-wt-sub m-0 mb-7 max-w-[480px]">
-            Welcome scores and real stories for <b>mixed-race couples, black travellers and diasporas</b> — so every trip feels like it was made for you.
+            Welcome scores and real stories for <b>mixed-race couples, black travellers and travelers of color</b> — so every trip feels like it was made for you.
           </p>
         </span>
         <SearchBar @select="goToCity" />
@@ -216,7 +216,7 @@ const mobileHeroSrcset = '/.netlify/images?url=%2Fhome%2Frome.webp&w=412&format=
 
 useSeo(() => ({
   title: 'WeTravel — Travel like you belong everywhere',
-  description: "Welcome scores and real reviews for mixed-race couples, black travellers and diasporas. Find out how welcome you'll feel in any city.",
+  description: "Welcome scores and real reviews for mixed-race couples, black travellers and travelers of color. Find out how welcome you'll feel in any city.",
   canonical: 'https://we-travel.world/',
 }))
 

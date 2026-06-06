@@ -3,30 +3,27 @@
     <div class="max-w-3xl mx-auto px-4 py-10 md:py-16">
 
       <h1 class="font-serif text-[32px] md:text-[40px] font-semibold text-wt-ink tracking-[-0.6px] mb-2">
-        Politique de cookies
+        Cookie Policy
       </h1>
-      <p class="text-wt-sub text-[14px] mb-10">Dernière mise à jour : {{ lastUpdated }}</p>
+      <p class="text-wt-sub text-[14px] mb-10">Last updated: {{ lastUpdated }}</p>
 
       <div class="flex flex-col gap-10">
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Qu'est-ce qu'un cookie ?</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">What is a cookie?</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, téléphone, tablette)
-            lorsque vous visitez un site web. Les cookies permettent au site de mémoriser vos préférences,
-            de maintenir votre session ouverte et de collecter des données d'utilisation anonymes.
+            A cookie is a small text file placed on your device (computer, phone, tablet)
+            when you visit a website. Cookies allow the site to remember your preferences,
+            keep your session open, and collect anonymous usage data.
           </p>
           <p class="text-[15px] text-wt-sub leading-relaxed mt-3">
-            Conformément aux recommandations de la
-            <a href="https://www.cnil.fr/fr/cookies-et-traceurs-que-dit-la-loi" target="_blank" rel="noopener noreferrer"
-              class="text-wt-coral font-medium no-underline hover:underline">CNIL</a>
-            et à l'article 82 de la Loi Informatique et Libertés, nous vous informons de l'utilisation
-            des cookies sur WeTravel.
+            In accordance with applicable privacy regulations, we inform you of the use
+            of cookies on WeTravel.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-4">Cookies utilisés sur WeTravel</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-4">Cookies used on WeTravel</h2>
 
           <div class="flex flex-col gap-5">
             <div v-for="category in cookieCategories" :key="category.title"
@@ -41,7 +38,7 @@
                         ? 'bg-wt-coral/10 text-wt-coral'
                         : 'bg-wt-line text-wt-sub'
                     ]">
-                      {{ category.required ? 'Strictement nécessaire' : 'Non essentiel' }}
+                      {{ category.required ? 'Strictly necessary' : 'Non-essential' }}
                     </span>
                   </div>
                   <p class="text-[13px] text-wt-sub">{{ category.description }}</p>
@@ -51,9 +48,9 @@
                 <table class="w-full text-[13px] text-left border-collapse">
                   <thead>
                     <tr class="bg-wt-bg">
-                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Nom</th>
-                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Finalité</th>
-                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Durée</th>
+                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Name</th>
+                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Purpose</th>
+                      <th class="px-4 py-2.5 font-semibold text-wt-ink">Duration</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -73,8 +70,8 @@
         <section>
           <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Matomo Analytics</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-3">
-            Nous utilisons <strong class="text-wt-ink">Matomo</strong>, un outil d'analyse d'audience
-            respectueux de la vie privée. Contrairement à Google Analytics, Matomo :
+            We use <strong class="text-wt-ink">Matomo</strong>, a privacy-friendly analytics tool.
+            Unlike Google Analytics, Matomo:
           </p>
           <ul class="flex flex-col gap-2 pl-0 list-none mb-4">
             <li v-for="item in matomoAdvantages" :key="item" class="flex gap-3 text-[15px] text-wt-sub leading-relaxed">
@@ -83,24 +80,21 @@
             </li>
           </ul>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Conformément aux
-            <a href="https://www.cnil.fr/fr/cookies-analytiques-la-cnil-publie-de-nouvelles-lignes-directrices" target="_blank" rel="noopener noreferrer"
-              class="text-wt-coral font-medium no-underline hover:underline">lignes directrices de la CNIL</a>,
-            notre configuration Matomo est exemptée de consentement car les données sont anonymisées
-            et non partagées avec des tiers.
+            Our Matomo configuration is exempt from consent requirements because data is anonymised
+            and not shared with third parties.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Comment gérer vos cookies ?</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">How to manage your cookies?</h2>
 
           <div class="flex flex-col gap-4">
             <div class="bg-white rounded-xl border border-wt-line px-5 py-4">
-              <h3 class="font-semibold text-wt-ink text-[15px] mb-2">Via votre navigateur</h3>
+              <h3 class="font-semibold text-wt-ink text-[15px] mb-2">Via your browser</h3>
               <p class="text-[14px] text-wt-sub leading-relaxed mb-3">
-                Vous pouvez configurer votre navigateur pour accepter, refuser ou supprimer les cookies.
-                Notez que la désactivation des cookies strictement nécessaires peut empêcher la connexion
-                à votre compte.
+                You can configure your browser to accept, refuse, or delete cookies.
+                Note that disabling strictly necessary cookies may prevent you from signing in
+                to your account.
               </p>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 <a v-for="browser in browsers" :key="browser.name"
@@ -113,38 +107,38 @@
             </div>
 
             <div class="bg-white rounded-xl border border-wt-line px-5 py-4">
-              <h3 class="font-semibold text-wt-ink text-[15px] mb-2">Opt-out Matomo</h3>
+              <h3 class="font-semibold text-wt-ink text-[15px] mb-2">Matomo opt-out</h3>
               <p class="text-[14px] text-wt-sub leading-relaxed">
-                Vous pouvez vous opposer à la mesure d'audience Matomo en cochant la case ci-dessous.
-                Un cookie de refus sera déposé pour mémoriser votre choix.
+                You can opt out of Matomo audience measurement by checking the box below.
+                A refusal cookie will be stored to remember your choice.
               </p>
               <div class="mt-3 flex items-center gap-3">
                 <input type="checkbox" id="matomo-optout" v-model="matomoOptOut"
                   @change="toggleMatomoOptOut"
                   class="w-4 h-4 accent-wt-coral cursor-pointer" />
                 <label for="matomo-optout" class="text-[14px] text-wt-ink cursor-pointer">
-                  Je m'oppose à la collecte de données d'audience par Matomo
+                  I object to audience data collection by Matomo
                 </label>
               </div>
               <p v-if="matomoOptOut" class="text-[13px] text-wt-coral mt-2">
-                ✓ Votre opposition est enregistrée. Matomo ne collectera plus de données vous concernant.
+                ✓ Your opt-out has been saved. Matomo will no longer collect data about you.
               </p>
             </div>
           </div>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Cookies tiers</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Third-party cookies</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-4">
-            WeTravel peut intégrer des contenus ou liens tiers susceptibles de déposer leurs propres cookies :
+            WeTravel may embed third-party content or links that may set their own cookies:
           </p>
           <div class="overflow-x-auto rounded-xl border border-wt-line">
             <table class="w-full text-[14px] text-left border-collapse">
               <thead>
                 <tr class="bg-wt-ink text-[#e9e0d4]">
-                  <th class="px-4 py-3 font-semibold rounded-tl-xl">Tiers</th>
-                  <th class="px-4 py-3 font-semibold">Finalité</th>
-                  <th class="px-4 py-3 font-semibold rounded-tr-xl">Politique</th>
+                  <th class="px-4 py-3 font-semibold rounded-tl-xl">Third party</th>
+                  <th class="px-4 py-3 font-semibold">Purpose</th>
+                  <th class="px-4 py-3 font-semibold rounded-tr-xl">Policy</th>
                 </tr>
               </thead>
               <tbody>
@@ -154,7 +148,7 @@
                   <td class="px-4 py-3">
                     <a :href="row.policyUrl" target="_blank" rel="noopener noreferrer"
                       class="text-wt-coral font-medium no-underline hover:underline text-[13px]">
-                      Voir →
+                      View →
                     </a>
                   </td>
                 </tr>
@@ -162,23 +156,23 @@
             </table>
           </div>
           <p class="text-[13px] text-wt-sub mt-3">
-            WeTravel n'a pas de contrôle sur les cookies déposés par ces tiers. Veuillez consulter
-            leurs politiques respectives pour en savoir plus.
+            WeTravel has no control over cookies set by these third parties. Please refer to
+            their respective policies for more information.
           </p>
         </section>
 
         <section>
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Mise à jour de cette politique</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-3">Updates to this policy</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed">
-            Nous pouvons mettre à jour cette politique de cookies pour refléter les évolutions du Service
-            ou les exigences réglementaires. La date de dernière mise à jour est indiquée en haut de page.
+            We may update this cookie policy to reflect changes to the Service or regulatory requirements.
+            The last updated date is shown at the top of this page.
           </p>
         </section>
 
         <section class="bg-white rounded-2xl border border-wt-line px-6 py-6">
-          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-1">Questions sur les cookies ?</h2>
+          <h2 class="font-serif text-[21px] font-semibold text-wt-ink mb-1">Questions about cookies?</h2>
           <p class="text-[15px] text-wt-sub leading-relaxed mb-4">
-            Contactez-nous pour toute question relative à notre utilisation des cookies :
+            Contact us for any questions about our use of cookies:
           </p>
           <a href="mailto:contact@we-travel.world"
             class="inline-flex items-center gap-2.5 bg-wt-coral text-white no-underline rounded-[13px] px-5 py-3 font-bold text-[15px] hover:opacity-90 transition-opacity">
@@ -199,11 +193,11 @@ import { ref, onMounted } from 'vue'
 import { useSeo } from '@/composables/useSeo'
 
 useSeo(() => ({
-  title: 'Politique de cookies — WeTravel',
-  description: 'Découvrez comment WeTravel utilise les cookies et comment gérer vos préférences.',
+  title: 'Cookie Policy — WeTravel',
+  description: 'Learn how WeTravel uses cookies and how to manage your preferences.',
 }))
 
-const lastUpdated = 'juin 2026'
+const lastUpdated = 'June 2026'
 const matomoOptOut = ref(false)
 
 onMounted(() => {
@@ -222,56 +216,56 @@ function toggleMatomoOptOut() {
 
 const cookieCategories = [
   {
-    title: 'Authentification',
+    title: 'Authentication',
     required: true,
-    description: 'Maintiennent votre session ouverte et sécurisent votre compte.',
+    description: 'Keep your session open and secure your account.',
     cookies: [
-      { name: 'access_token', purpose: 'Token JWT d\'authentification', duration: '15 minutes' },
-      { name: 'refresh_token', purpose: 'Renouvellement automatique de session', duration: '7 jours' },
+      { name: 'access_token', purpose: 'JWT authentication token', duration: '15 minutes' },
+      { name: 'refresh_token', purpose: 'Automatic session renewal', duration: '7 days' },
     ],
   },
   {
-    title: 'Analyse d\'audience (Matomo)',
+    title: 'Audience analytics (Matomo)',
     required: false,
-    description: 'Mesure anonyme du trafic. Aucune donnée personnelle transmise à des tiers.',
+    description: 'Anonymous traffic measurement. No personal data shared with third parties.',
     cookies: [
-      { name: '_pk_id.*', purpose: 'Identifiant visiteur anonyme', duration: '13 mois' },
-      { name: '_pk_ses.*', purpose: 'Session de navigation en cours', duration: '30 minutes' },
-      { name: 'mtm_consent_removed', purpose: 'Mémorisation du refus Matomo', duration: '1 an' },
+      { name: '_pk_id.*', purpose: 'Anonymous visitor identifier', duration: '13 months' },
+      { name: '_pk_ses.*', purpose: 'Current browsing session', duration: '30 minutes' },
+      { name: 'mtm_consent_removed', purpose: 'Stores Matomo opt-out preference', duration: '1 year' },
     ],
   },
 ]
 
 const matomoAdvantages = [
-  'N\'envoie aucune donnée vers des serveurs aux États-Unis.',
-  'Anonymise les adresses IP avant stockage.',
-  'Ne crée pas de profil publicitaire.',
-  'Est hébergé sur notre propre infrastructure (Matomo Cloud EU).',
-  'Respecte le droit à l\'opt-out sans affecter le fonctionnement du site.',
+  'Sends no data to servers in the United States.',
+  'Anonymises IP addresses before storage.',
+  'Does not build advertising profiles.',
+  'Is hosted on our own infrastructure (Matomo Cloud EU).',
+  'Respects the right to opt out without affecting site functionality.',
 ]
 
 const browsers = [
   { name: 'Chrome', url: 'https://support.google.com/chrome/answer/95647' },
-  { name: 'Firefox', url: 'https://support.mozilla.org/fr/kb/cookies-informations-sites-enregistrent' },
-  { name: 'Safari', url: 'https://support.apple.com/fr-fr/guide/safari/sfri11471/mac' },
-  { name: 'Edge', url: 'https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-dans-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' },
+  { name: 'Firefox', url: 'https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer' },
+  { name: 'Safari', url: 'https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac' },
+  { name: 'Edge', url: 'https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' },
   { name: 'Opera', url: 'https://help.opera.com/en/latest/web-preferences/#cookies' },
 ]
 
 const thirdParties = [
   {
     name: 'Google Fonts',
-    purpose: 'Chargement des polices de caractères',
+    purpose: 'Loading web fonts',
     policyUrl: 'https://policies.google.com/privacy',
   },
   {
     name: 'Booking.com',
-    purpose: 'Liens d\'affiliation pour la réservation d\'hébergements',
+    purpose: 'Affiliate links for accommodation booking',
     policyUrl: 'https://www.booking.com/content/privacy.html',
   },
   {
     name: 'Unsplash',
-    purpose: 'Photos des villes (CDN)',
+    purpose: 'City photos (CDN)',
     policyUrl: 'https://unsplash.com/privacy',
   },
 ]

@@ -49,7 +49,7 @@
 
           <h2 class="font-serif text-[20px] font-semibold text-wt-ink mb-2 tracking-[-0.3px]">Before you post</h2>
           <p class="text-[14px] text-wt-sub leading-relaxed mb-4">
-            WeTravel is a safety companion for Black travelers, African diaspora members, and mixed-race couples. Your review helps real people make informed decisions about where they travel.
+            WeTravel is a safety companion for Black travelers and mixed-race couples. Your review helps real people make informed decisions about where they travel.
           </p>
 
           <div class="bg-wt-bg rounded-2xl px-4 py-3.5 mb-5 flex flex-col gap-2">

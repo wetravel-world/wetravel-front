@@ -5,7 +5,7 @@
     <section class="bg-wt-ocean text-white px-4 md:px-14 pt-8 pb-9 md:pt-9">
       <div class="max-w-[1180px] mx-auto">
         <h1 class="font-serif text-[26px] md:text-[34px] font-semibold m-0 mb-1 tracking-[-0.5px]">Find your destination</h1>
-        <p class="text-[14.5px] md:text-[15.5px] m-0 mb-5 text-white/80">Search welcome scores for black travellers, the diaspora and mixed-race couples.</p>
+        <p class="text-[14.5px] md:text-[15.5px] m-0 mb-5 text-white/80">Search welcome scores for black travellers, mixed-race couples...</p>
         <div class="flex items-center gap-3 bg-white rounded-2xl pl-4 pr-1.5 py-1.5 max-w-[620px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e9663e" stroke-width="2" stroke-linecap="round" class="flex-shrink-0"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
           <input
@@ -165,7 +165,7 @@ import { useSeo } from '@/composables/useSeo'
 
 useSeo(() => ({
   title: 'Explore cities — WeTravel',
-  description: 'Search and filter cities worldwide by welcome score for black travellers, mixed-race couples and the African diaspora.',
+  description: 'Search and filter cities worldwide by welcome score for black travellers, mixed-race couples and travelers of color.',
   canonical: 'https://we-travel.world/search',
 }))
 
