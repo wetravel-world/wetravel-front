@@ -29,6 +29,22 @@
       imagesizes="100vw"
       fetchpriority="high"
       media="(max-width: 767px)" />
+    <!-- Google Ads: Consent Mode v2 defaults (denied until user accepts) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18219477717"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'AW-18219477717');
+    </script>
     <!-- preconnect critical third-party origins -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
