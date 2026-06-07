@@ -7,6 +7,7 @@ const router = createRouter({
     { path: '/', component: () => import('@/pages/index.vue') },
     { path: '/search', component: () => import('@/pages/search.vue') },
     { path: '/city/:slug', component: () => import('@/pages/city/[slug].vue') },
+    { path: '/country/:slug', component: () => import('@/pages/country/[slug].vue') },
     { path: '/auth/login', component: () => import('@/pages/auth/login.vue'), meta: { hideLayout: true } },
     { path: '/auth/register', component: () => import('@/pages/auth/register.vue'), meta: { hideLayout: true } },
     { path: '/auth/google/callback', component: () => import('@/pages/auth/google-callback.vue'), meta: { hideLayout: true } },

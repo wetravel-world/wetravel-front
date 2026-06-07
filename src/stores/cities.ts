@@ -27,9 +27,22 @@ export interface Place {
   address: string
 }
 
+export interface Country {
+  country: string
+  slug: string
+  average_score: number | null
+  city_count: number
+  hero_image_url: string
+  hero_image_attribution_name: string
+  hero_image_attribution_url: string
+  description: string
+  cities: City[]
+}
+
 export const useCitiesStore = defineStore('cities', () => {
   const cities = ref<City[]>([])
   const current = ref<City | null>(null)
+  const currentCountry = ref<Country | null>(null)
   const loading = ref(false)
   const loadingMore = ref(false)
   const total = ref(0)
@@ -86,5 +99,15 @@ export const useCitiesStore = defineStore('cities', () => {
     }
   }
 
-  return { cities, current, loading, loadingMore, total, hasMore, search, loadMore, fetchCity }
+  async function fetchCountry(slug: string) {
+    loading.value = true
+    try {
+      const { data } = await api.get(`/countries/${slug}/`)
+      currentCountry.value = data
+    } finally {
+      loading.value = false
+    }
+  }
+
+  return { cities, current, currentCountry, loading, loadingMore, total, hasMore, search, loadMore, fetchCity, fetchCountry }
 })
