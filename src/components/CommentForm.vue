@@ -21,7 +21,7 @@
       </button>
     </form>
   </div>
-  <div v-else class="bg-wt-bg border border-wt-line rounded-2xl p-5 text-center">
+  <div v-else class="bg-wt-bg border border-wt-line rounded-2xl p-5 text-center mb-2">
     <p class="text-[14px] text-wt-sub m-0">
       <RouterLink to="/auth/login" class="text-wt-coral font-bold no-underline">Sign in</RouterLink> to leave a review.
     </p>
