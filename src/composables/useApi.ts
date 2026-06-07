@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { i18n } from '@/i18n'
 
 // Use a relative base URL so:
 // - In dev: Vite's proxy forwards /api/* to localhost:8000
@@ -6,6 +7,13 @@ import axios from 'axios'
 const api = axios.create({
   baseURL: '/api',
   withCredentials: true,
+})
+
+// Send the active locale so the backend can return pre-translated content
+// (e.g. city/country descriptions) without any live translation call.
+api.interceptors.request.use((config) => {
+  config.params = { ...config.params, lang: i18n.global.locale.value }
+  return config
 })
 
 api.interceptors.response.use(

@@ -9,8 +9,9 @@
 
       <!-- desktop nav -->
       <div class="hidden md:flex items-center gap-6 text-[15px] font-medium">
-        <RouterLink to="/search" :class="['no-underline font-medium', isActive('/search') ? 'text-wt-coral font-bold' : 'text-wt-sub']">Explore</RouterLink>
-        <a href="/#stories" class="text-wt-sub no-underline">Stories</a>
+        <RouterLink to="/search" :class="['no-underline font-medium', isActive('/search') ? 'text-wt-coral font-bold' : 'text-wt-sub']">{{ t('nav.explore') }}</RouterLink>
+        <a href="/#stories" class="text-wt-sub no-underline">{{ t('nav.stories') }}</a>
+        <LanguageSwitcher />
 
         <!-- authenticated: avatar + dropdown -->
         <template v-if="auth.isAuthenticated && auth.user">
@@ -44,7 +45,7 @@
                 class="flex items-center gap-2.5 px-4 py-2.5 text-[14px] text-wt-ink no-underline hover:bg-wt-bg rounded-lg mx-1"
               >
                 <svg class="w-4 h-4 text-wt-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                My profile
+                {{ t('nav.myProfile') }}
               </RouterLink>
               <RouterLink
                 to="/settings"
@@ -52,7 +53,7 @@
                 class="flex items-center gap-2.5 px-4 py-2.5 text-[14px] text-wt-ink no-underline hover:bg-wt-bg rounded-lg mx-1"
               >
                 <svg class="w-4 h-4 text-wt-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                Settings
+                {{ t('nav.settings') }}
               </RouterLink>
               <div class="border-t border-wt-line mt-1 pt-1">
                 <button
@@ -60,7 +61,7 @@
                   class="flex items-center gap-2.5 w-full px-4 py-2.5 text-[14px] text-red-500 hover:bg-red-50 rounded-lg mx-1 text-left"
                 >
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                  Log out
+                  {{ t('nav.logOut') }}
                 </button>
               </div>
             </div>
@@ -69,8 +70,8 @@
 
         <!-- guest: login + signup -->
         <template v-else>
-          <RouterLink to="/auth/login" class="text-wt-sub no-underline font-medium">Log in</RouterLink>
-          <RouterLink to="/auth/register" class="bg-wt-coral text-white rounded-xl px-4 py-2.5 font-bold text-[14.5px] no-underline">Sign up</RouterLink>
+          <RouterLink to="/auth/login" class="text-wt-sub no-underline font-medium">{{ t('nav.logIn') }}</RouterLink>
+          <RouterLink to="/auth/register" class="bg-wt-coral text-white rounded-xl px-4 py-2.5 font-bold text-[14.5px] no-underline">{{ t('nav.signUp') }}</RouterLink>
         </template>
       </div>
 
@@ -90,10 +91,10 @@
           </RouterLink>
         </template>
         <template v-else>
-          <RouterLink to="/auth/login" class="text-wt-sub no-underline text-sm font-semibold">Log in</RouterLink>
+          <RouterLink to="/auth/login" class="text-wt-sub no-underline text-sm font-semibold">{{ t('nav.logIn') }}</RouterLink>
         </template>
         <!-- hamburger -->
-        <button @click="menuOpen = !menuOpen" class="p-1.5 rounded-lg text-wt-ink" aria-label="Menu">
+        <button @click="menuOpen = !menuOpen" class="p-1.5 rounded-lg text-wt-ink" :aria-label="t('nav.menu')">
           <svg v-if="!menuOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -104,27 +105,41 @@
     <div v-if="menuOpen" class="md:hidden border-t border-wt-line bg-wt-bg px-4 pb-5 pt-3 flex flex-col gap-1">
       <RouterLink to="/search" @click="menuOpen = false"
         :class="['py-3 px-2 rounded-xl text-[15px] font-medium no-underline', isActive('/search') ? 'text-wt-coral font-bold bg-wt-coral/10' : 'text-wt-ink']">
-        Explore cities
+        {{ t('nav.explore') }}
       </RouterLink>
-      <a href="#stories" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline">Stories</a>
-      <a href="#stories" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline">Community</a>
+      <a href="#stories" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline">{{ t('nav.stories') }}</a>
+
+      <div class="mt-2 pt-3 border-t border-wt-line flex items-center justify-between">
+        <span class="px-2 text-[12px] font-semibold text-wt-sub uppercase tracking-wide">{{ t('language.label') }}</span>
+        <div class="flex gap-1.5 pr-1">
+          <button
+            v-for="code in SUPPORTED_LOCALES"
+            :key="code"
+            @click="setLocale(code)"
+            :class="['px-3 py-1.5 rounded-lg text-[13px] font-bold uppercase transition-colors',
+              code === locale ? 'bg-wt-coral text-white' : 'bg-white text-wt-sub border border-wt-line']"
+          >
+            {{ code }}
+          </button>
+        </div>
+      </div>
 
       <template v-if="auth.isAuthenticated && auth.user">
         <div class="mt-2 pt-3 border-t border-wt-line flex flex-col gap-1">
-          <RouterLink to="/profile" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline font-medium">My profile</RouterLink>
-          <RouterLink to="/settings" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline font-medium">Settings</RouterLink>
-          <button @click="handleLogout" class="py-3 px-2 rounded-xl text-[15px] text-red-500 font-medium text-left">Log out</button>
+          <RouterLink to="/profile" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline font-medium">{{ t('nav.myProfile') }}</RouterLink>
+          <RouterLink to="/settings" @click="menuOpen = false" class="py-3 px-2 rounded-xl text-[15px] text-wt-ink no-underline font-medium">{{ t('nav.settings') }}</RouterLink>
+          <button @click="handleLogout" class="py-3 px-2 rounded-xl text-[15px] text-red-500 font-medium text-left">{{ t('nav.logOut') }}</button>
         </div>
       </template>
       <template v-else>
         <div class="mt-2 pt-3 border-t border-wt-line flex flex-col gap-2">
           <RouterLink to="/auth/login" @click="menuOpen = false"
             class="py-3 px-4 rounded-xl text-center text-[15px] font-semibold text-wt-ink no-underline border border-wt-line">
-            Log in
+            {{ t('nav.logIn') }}
           </RouterLink>
           <RouterLink to="/auth/register" @click="menuOpen = false"
             class="py-3 px-4 rounded-xl text-center text-[15px] font-bold text-white bg-wt-coral no-underline">
-            Sign up
+            {{ t('nav.signUp') }}
           </RouterLink>
         </div>
       </template>
@@ -135,8 +150,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
+import { SUPPORTED_LOCALES, setLocale } from '@/i18n'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 
+const { t, locale } = useI18n()
 const auth = useAuthStore()
 const route = useRoute()
 const router = useRouter()

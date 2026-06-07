@@ -4,13 +4,13 @@
     <!-- search header -->
     <section class="bg-wt-ocean text-white px-4 md:px-14 pt-8 pb-9 md:pt-9">
       <div class="max-w-[1180px] mx-auto">
-        <h1 class="font-serif text-[26px] md:text-[34px] font-semibold m-0 mb-1 tracking-[-0.5px]">Find your destination</h1>
-        <p class="text-[14.5px] md:text-[15.5px] m-0 mb-5 text-white/80">Search welcome scores for black travellers, mixed-race couples...</p>
+        <h1 class="font-serif text-[26px] md:text-[34px] font-semibold m-0 mb-1 tracking-[-0.5px]">{{ t('search.title') }}</h1>
+        <p class="text-[14.5px] md:text-[15.5px] m-0 mb-5 text-white/80">{{ t('search.subtitle') }}</p>
         <div class="flex items-center gap-3 bg-white rounded-2xl pl-4 pr-1.5 py-1.5 max-w-[620px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e9663e" stroke-width="2" stroke-linecap="round" class="flex-shrink-0"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
           <input
             v-model="query"
-            placeholder='Try a city or country…'
+            :placeholder="t('search.placeholder')"
             class="flex-1 border-0 outline-none bg-transparent text-wt-ink text-[15px] md:text-[16px] py-3"
             @input="onSearch"
           />
@@ -31,18 +31,18 @@
             @click="selectContinent(c)"
             :class="['border-2 rounded-full px-3.5 py-1.5 font-semibold text-[13px] cursor-pointer transition-all duration-150',
               activeContinent === c ? 'border-wt-coral-aa bg-wt-coral-aa text-white' : 'border-wt-line bg-white text-wt-ink']">
-            {{ c }}
+            {{ t(`search.continents.${c}`) }}
           </button>
         </div>
         <!-- sort + count -->
         <div class="flex items-center gap-3 flex-shrink-0">
           <span class="text-[13px] text-wt-sub">
-            <strong class="text-wt-ink">{{ store.total }}</strong> {{ store.total === 1 ? 'city' : 'cities' }}<span v-if="query"> for "{{ query }}"</span>
+            <strong class="text-wt-ink">{{ store.total }}</strong> {{ t('search.cityCount', store.total) }}<span v-if="query">{{ t('search.forQuery', { query }) }}</span>
           </span>
-          <select v-model="sortBy" @change="resort" aria-label="Sort cities by"
+          <select v-model="sortBy" @change="resort" :aria-label="t('search.sortLabel')"
             class="border border-wt-line bg-white rounded-xl px-3 py-2 text-[13.5px] text-wt-ink font-semibold cursor-pointer outline-none">
-            <option value="score">Welcome score</option>
-            <option value="name">Name (A–Z)</option>
+            <option value="score">{{ t('search.sortByScore') }}</option>
+            <option value="name">{{ t('search.sortByName') }}</option>
           </select>
         </div>
       </div>
@@ -115,9 +115,9 @@
                 <p class="m-0 mt-1.5 text-[13px] leading-relaxed text-wt-sub flex-1 line-clamp-2">{{ city.description }}</p>
                 <div class="flex items-center gap-1.5 text-[12px] text-wt-sub mt-2">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#e0a52e"><path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.9 6.2 20.95l1.1-6.5-4.7-4.6 6.5-.95z"/></svg>
-                  {{ city.score_count }} reviews
+                  {{ t('search.reviews', city.score_count) }}
                   <span class="ml-auto text-wt-coral font-bold inline-flex items-center gap-1">
-                    View <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    {{ t('search.view') }} <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                   </span>
                 </div>
               </div>
@@ -128,11 +128,11 @@
 
       <!-- no results -->
       <div v-else-if="!store.loading" class="text-center py-16">
-        <div class="text-[18px] font-bold mb-1.5">No destinations match your search</div>
-        <div class="text-[15px] text-wt-sub mb-5">We're adding cities every week. Try a different term or continent.</div>
+        <div class="text-[18px] font-bold mb-1.5">{{ t('search.noResultsTitle') }}</div>
+        <div class="text-[15px] text-wt-sub mb-5">{{ t('search.noResultsSubtitle') }}</div>
         <button @click="reset"
           class="bg-wt-coral text-white border-0 rounded-xl px-6 py-3 font-bold text-[15px] cursor-pointer">
-          Clear filters
+          {{ t('search.clearFilters') }}
         </button>
       </div>
 
@@ -158,10 +158,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useCitiesStore } from '@/stores/cities'
 import { scoreColor, scoreLabel, TONES } from '@/composables/useScore'
 import { trackSiteSearch } from '@/composables/useMatomo'
 import { useSeo } from '@/composables/useSeo'
+
+const { t, locale } = useI18n()
 
 useSeo(() => ({
   title: 'Explore cities — WeTravel',
@@ -253,6 +256,10 @@ watch(sentinel, setupObserver)
 onUnmounted(() => observer?.disconnect())
 
 onMounted(() => store.search(query.value || '', 'All'))
+
+// Re-run the active search on locale change so city descriptions come back
+// pre-translated from the backend (see useApi's `lang` param interceptor).
+watch(locale, () => store.search(query.value, activeContinent.value))
 </script>
 
 <style scoped>

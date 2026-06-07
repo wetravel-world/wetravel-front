@@ -1,6 +1,6 @@
 <template>
   <div v-if="store.loading" class="flex justify-center items-center min-h-[50vh]">
-    <p class="text-wt-sub">Loading…</p>
+    <p class="text-wt-sub">{{ t('common.loading') }}</p>
   </div>
 
   <div v-else-if="country" class="font-sans text-wt-ink bg-wt-bg">
@@ -31,22 +31,22 @@
         <RouterLink to="/search"
           class="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-wt-ink no-underline bg-white/[0.92] rounded-[10px] px-3 py-[7px]">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          <span class="hidden sm:inline">All cities</span>
+          <span class="hidden sm:inline">{{ t('country.allCities') }}</span>
         </RouterLink>
 
         <!-- country info overlay -->
         <div class="absolute left-4 md:left-7 bottom-4 md:bottom-7 right-4 md:right-7 flex items-end justify-between gap-3 pointer-events-none text-white">
           <div class="min-w-0">
-            <div class="font-mono text-[11px] tracking-widest opacity-90 mb-1">{{ country.city_count }} {{ country.city_count === 1 ? 'CITY' : 'CITIES' }}</div>
+            <div class="font-mono text-[11px] tracking-widest opacity-90 mb-1 uppercase">{{ t('country.city', country.city_count) }}</div>
             <h1 class="font-serif font-semibold m-0 leading-tight text-[32px] sm:text-[42px] md:text-[52px] tracking-[-0.5px] [text-shadow:0_2px_16px_rgba(0,0,0,0.4)]">{{ country.country }}</h1>
           </div>
           <!-- average score badge — desktop only in hero -->
           <div v-if="country.average_score !== null" class="hidden md:flex items-center gap-3.5 pointer-events-auto flex-shrink-0 bg-white/[0.96] rounded-[18px] px-[18px] py-[14px]">
             <WelcomeScore :score="numScore" :size="64" :stroke="7" />
             <div class="whitespace-nowrap">
-              <div class="text-xs text-wt-sub font-semibold">Average welcome score</div>
+              <div class="text-xs text-wt-sub font-semibold">{{ t('country.averageWelcomeScore') }}</div>
               <div class="text-[18px] font-extrabold" :style="`color:${scoreColor(numScore).ink}`">{{ scoreLabel(numScore) }}</div>
-              <div class="text-xs text-wt-sub">across {{ country.city_count }} {{ country.city_count === 1 ? 'city' : 'cities' }}</div>
+              <div class="text-xs text-wt-sub">{{ t('country.across', { n: t('country.city', country.city_count) }) }}</div>
             </div>
           </div>
         </div>
@@ -58,9 +58,9 @@
       <div class="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm">
         <WelcomeScore :score="numScore" :size="52" :stroke="6" />
         <div>
-          <div class="text-xs text-wt-sub font-semibold">Average welcome score</div>
+          <div class="text-xs text-wt-sub font-semibold">{{ t('country.averageWelcomeScore') }}</div>
           <div class="text-lg font-extrabold" :style="`color:${scoreColor(numScore).ink}`">{{ scoreLabel(numScore) }}</div>
-          <div class="text-xs text-wt-sub">across {{ country.city_count }} {{ country.city_count === 1 ? 'city' : 'cities' }}</div>
+          <div class="text-xs text-wt-sub">{{ t('country.across', { n: t('country.city', country.city_count) }) }}</div>
         </div>
       </div>
     </div>
@@ -70,20 +70,20 @@
 
       <!-- SEO intro -->
       <p class="text-[17px] md:text-[18.5px] leading-relaxed text-wt-ink mb-3">
-        <strong>Is {{ country.country }} safe for black travellers?</strong> {{ country.description }}
+        <strong>{{ t('country.isItSafe', { country: country.country }) }}</strong> {{ country.description }}
       </p>
       <p v-if="country.average_score !== null" class="text-[15px] leading-relaxed text-wt-sub mb-8">
-        Across the {{ country.city_count }} {{ country.city_count === 1 ? 'city' : 'cities' }} we cover in {{ country.country }}, the average welcome score is {{ numScore.toFixed(1) }}/10 — blending editorial research, official data and reviews from mixed-race couples, black travellers and travelers of color.
+        {{ t('country.scoreBlend', { count: t('country.city', country.city_count), score: numScore.toFixed(1) }) }}
       </p>
 
       <!-- cities -->
       <section>
-        <div class="font-mono text-[11px] tracking-[1.2px] text-wt-coral uppercase mb-2">Explore</div>
-        <h2 class="font-serif text-2xl md:text-[27px] font-semibold m-0 mb-4 tracking-[-0.4px]">Cities in {{ country.country }}</h2>
+        <div class="font-mono text-[11px] tracking-[1.2px] text-wt-coral uppercase mb-2">{{ t('country.exploreLabel') }}</div>
+        <h2 class="font-serif text-2xl md:text-[27px] font-semibold m-0 mb-4 tracking-[-0.4px]">{{ t('country.citiesIn', { country: country.country }) }}</h2>
         <div v-if="country.cities.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <CityCard v-for="(city, i) in country.cities" :key="city.id" :city="city" :index="i" />
         </div>
-        <p v-else class="text-[14px] text-wt-sub">No cities listed for {{ country.country }} yet.</p>
+        <p v-else class="text-[14px] text-wt-sub">{{ t('country.noCities', { country: country.country }) }}</p>
       </section>
     </div>
 
@@ -91,14 +91,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useCitiesStore } from '@/stores/cities'
 import { useSeo, useJsonLd } from '@/composables/useSeo'
 import { scoreColor, scoreLabel } from '@/composables/useScore'
 import WelcomeScore from '@/components/WelcomeScore.vue'
 import CityCard from '@/components/CityCard.vue'
 
+const { t, locale } = useI18n()
 const route = useRoute()
 const store = useCitiesStore()
 const country = computed(() => store.currentCountry)
@@ -122,7 +124,15 @@ function heroSrcset(url: string): string | undefined {
   } catch { return undefined }
 }
 
-onMounted(() => store.fetchCountry(route.params.slug as string))
+function load() {
+  store.fetchCountry(route.params.slug as string)
+}
+
+onMounted(load)
+
+// Re-fetch on locale change so the description (and nested cities'
+// descriptions) come back pre-translated from the backend.
+watch(locale, load)
 
 useSeo(() => ({
   title: country.value ? `Is ${country.value.country} welcoming for Black travelers? — WeTravel` : 'WeTravel',

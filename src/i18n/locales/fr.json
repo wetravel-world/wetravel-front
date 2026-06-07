@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "explore": "Explorer",
+    "stories": "Témoignages",
+    "myProfile": "Mon profil",
+    "settings": "Paramètres",
+    "logOut": "Se déconnecter",
+    "logIn": "Connexion",
+    "signUp": "S'inscrire",
+    "menu": "Menu"
+  },
+  "footer": {
+    "tagline": "Nous aidons les voyageurs noirs et les couples mixtes à trouver les endroits où ils se sentent chez eux.",
+    "discover": "Découvrir",
+    "exploreCities": "Explorer les villes",
+    "topRated": "Les mieux notées",
+    "newThisMonth": "Nouveautés du mois",
+    "map": "Carte",
+    "legal": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfService": "Conditions d'utilisation",
+    "cookies": "Cookies",
+    "contact": "Contact",
+    "disclaimer": "Les scores affichés proviennent de données communautaires et ne représentent pas une évaluation officielle de la sécurité d'une ville.",
+    "copyright": "© {year} WeTravel"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "viewMore": "Voir plus",
+    "seeMore": "En savoir plus"
+  },
+  "language": {
+    "label": "Langue",
+    "en": "English",
+    "fr": "Français"
+  },
+  "home": {
+    "badge": "Voyagez comme si vous étiez chez vous, partout",
+    "title1": "Trouvez les endroits où vous pouvez",
+    "titleHighlight": "voyager en toute sérénité.",
+    "subtitle": "Des scores d'accueil et de vrais témoignages pour {bold} — pour que chaque voyage soit pensé pour vous.",
+    "subtitleBold": "les couples mixtes, les voyageurs noirs et les voyageurs racisés",
+    "perk1": "De vrais avis de la communauté",
+    "perk2": "Des villes du monde entier notées",
+    "perk3": "Des hébergements vérifiés",
+    "trustResearchedTitle": "Recherché",
+    "trustResearchedSub": "Données éditoriales et officielles",
+    "trustReviewedTitle": "Avis vérifiés",
+    "trustReviewedSub": "Par des voyageurs comme vous",
+    "trustCouplesTitle": "Pour les couples",
+    "trustCouplesSub": "Adapté aux couples mixtes",
+    "trustSafeTitle": "En sécurité",
+    "trustSafeSub": "Hébergements vérifiés",
+    "lovedByTravellers": "Plébiscité par les voyageurs",
+    "featuredTitle": "Là où les voyageurs se sentent bienvenus",
+    "exploreAll": "Tout explorer",
+    "noCitiesYet": "Pas encore de villes — revenez bientôt.",
+    "fromCommunity": "Depuis la communauté",
+    "storiesTitle": "Témoignages de voyageurs comme vous",
+    "storyAriaLabel": "Témoignage {n}",
+    "ctaTitle": "Vous préparez un voyage ? Commencez par savoir si vous y serez bien accueilli.",
+    "ctaSubtitle": "Recherchez une ville, consultez le détail du score, puis réservez un hébergement vérifié.",
+    "ctaButton": "Explorer les destinations",
+    "stories": [
+      {
+        "quote": "Accra m'a donné l'impression de rentrer à la maison sans même le savoir. Le score était juste — une chaleur authentique.",
+        "name": "Kwame O.",
+        "meta": "Voyageur solo · Atlanta → Accra"
+      },
+      {
+        "quote": "En tant que couple mixte, on se renseigne toujours avant. Lisbonne avait un score de 8,6 et ça s'est confirmé sur place.",
+        "name": "Sofia & Dani",
+        "meta": "Couple mixte · Lisbonne"
+      },
+      {
+        "quote": "Je consulte WeTravel avant chaque voyage maintenant. Ça m'a évité de mauvaises surprises — et permis de trouver de superbes hébergements.",
+        "name": "Naomi R.",
+        "meta": "Voyageuse d'affaires · Toronto"
+      }
+    ]
+  },
+  "search": {
+    "title": "Trouvez votre destination",
+    "subtitle": "Recherchez les scores d'accueil pour les voyageurs noirs, les couples mixtes...",
+    "placeholder": "Essayez une ville ou un pays…",
+    "sortLabel": "Trier les villes par",
+    "sortByScore": "Score d'accueil",
+    "sortByName": "Nom (A–Z)",
+    "cityCount": "{n} ville | {n} villes",
+    "forQuery": " pour « {query} »",
+    "reviews": "{n} avis",
+    "view": "Voir",
+    "noResultsTitle": "Aucune destination ne correspond à votre recherche",
+    "noResultsSubtitle": "Nous ajoutons des villes chaque semaine. Essayez un autre terme ou continent.",
+    "clearFilters": "Réinitialiser les filtres",
+    "continents": {
+      "All": "Tous",
+      "Africa": "Afrique",
+      "Americas": "Amériques",
+      "Asia": "Asie",
+      "Europe": "Europe",
+      "Middle East": "Moyen-Orient",
+      "Oceania": "Océanie"
+    }
+  },
+  "city": {
+    "allCities": "Toutes les villes",
+    "welcomeScore": "Score d'accueil",
+    "reviews": "{n} avis",
+    "isItSafe": "{city} est-elle sûre pour les voyageurs noirs ?",
+    "scoreBlend": "Notre score d'accueil de {score}/10 combine recherche éditoriale, données officielles et {count} avis de couples mixtes, voyageurs noirs et voyageurs racisés qui se sont rendus à {city}.",
+    "everyHostVetted": "Chaque hôte est vérifié comme accueillant",
+    "breakdownLabel": "Le détail",
+    "howWelcoming": "À quel point {city} est-elle accueillante ?",
+    "safety": "Sécurité",
+    "realReviewsLabel": "Avis authentiques",
+    "whatTravellersSay": "Ce que disent les voyageurs",
+    "seeItLabel": "À voir",
+    "placesIn": "Lieux à {city}"
+  },
+  "country": {
+    "allCities": "Toutes les villes",
+    "city": "{n} ville | {n} villes",
+    "averageWelcomeScore": "Score d'accueil moyen",
+    "across": "sur {n}",
+    "isItSafe": "{country} est-il sûr pour les voyageurs noirs ?",
+    "scoreBlend": "Sur {count}, le score d'accueil moyen est de {score}/10 — combinant recherche éditoriale, données officielles et avis de couples mixtes, voyageurs noirs et voyageurs racisés.",
+    "exploreLabel": "Explorer",
+    "citiesIn": "Villes en/au {country}",
+    "noCities": "Aucune ville référencée pour {country} pour le moment."
+  },
+  "comments": {
+    "loading": "Chargement des avis…",
+    "stampsCollected": "Tampons collectés",
+    "deleteComment": "Supprimer l'avis",
+    "deleteReply": "Supprimer la réponse",
+    "deleteConfirm": "Supprimer ?",
+    "cancel": "Annuler",
+    "reply": "Répondre",
+    "replies": "{n} réponse | {n} réponses",
+    "replyPlaceholder": "Écrivez une réponse…",
+    "send": "Envoyer",
+    "signInToReply": "Connectez-vous pour répondre",
+    "seeAllReviews": "Voir les {n} avis",
+    "noReviewsYet": "Pas encore d'avis. Soyez le premier !",
+    "translate": "Traduire",
+    "showOriginal": "Afficher l'original",
+    "translating": "Traduction…",
+    "translatedFrom": "Traduit depuis {lang}"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "explore": "Explore",
+    "stories": "Stories",
+    "myProfile": "My profile",
+    "settings": "Settings",
+    "logOut": "Log out",
+    "logIn": "Log in",
+    "signUp": "Sign up",
+    "menu": "Menu"
+  },
+  "footer": {
+    "tagline": "Helping black travellers and mixed-race couples find the places where they belong.",
+    "discover": "Discover",
+    "exploreCities": "Explore cities",
+    "topRated": "Top rated",
+    "newThisMonth": "New this month",
+    "map": "Map",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookies": "Cookies",
+    "contact": "Contact",
+    "disclaimer": "Scores shown are community-driven data and do not represent official safety assessments of any city.",
+    "copyright": "© {year} WeTravel"
+  },
+  "common": {
+    "loading": "Loading…",
+    "viewMore": "View more",
+    "seeMore": "See more"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "fr": "Français"
+  },
+  "home": {
+    "badge": "Travel like you belong everywhere",
+    "title1": "Find places where you can",
+    "titleHighlight": "travel safely.",
+    "subtitle": "Welcome scores and real stories for {bold} — so every trip feels like it was made for you.",
+    "subtitleBold": "mixed-race couples, black travellers and travelers of color",
+    "perk1": "Real community reviews",
+    "perk2": "Cities worldwide scored",
+    "perk3": "Vetted places to stay",
+    "trustResearchedTitle": "Researched",
+    "trustResearchedSub": "Editorial + official data",
+    "trustReviewedTitle": "Reviewed",
+    "trustReviewedSub": "By travellers like you",
+    "trustCouplesTitle": "For couples",
+    "trustCouplesSub": "Mixed-race friendly",
+    "trustSafeTitle": "Stay safe",
+    "trustSafeSub": "Vetted places to stay",
+    "lovedByTravellers": "Loved by travellers",
+    "featuredTitle": "Where travellers feel welcome",
+    "exploreAll": "Explore all",
+    "noCitiesYet": "No cities yet — check back soon.",
+    "fromCommunity": "From the community",
+    "storiesTitle": "Stories from travellers like you",
+    "storyAriaLabel": "Story {n}",
+    "ctaTitle": "Planning a trip? Start with how welcome you'll feel.",
+    "ctaSubtitle": "Search any city, read the breakdown, then book a vetted place to stay.",
+    "ctaButton": "Explore destinations",
+    "stories": [
+      {
+        "quote": "Accra felt like a homecoming I didn't know I needed. The score was right — pure warmth.",
+        "name": "Kwame O.",
+        "meta": "Solo traveller · Atlanta → Accra"
+      },
+      {
+        "quote": "As a mixed couple we always research first. Lisbon scored an 8.6 and it absolutely delivered.",
+        "name": "Sofia & Dani",
+        "meta": "Interracial couple · Lisbon"
+      },
+      {
+        "quote": "I check WeTravel before every trip now. It's saved me from a few bad calls — and found us great stays.",
+        "name": "Naomi R.",
+        "meta": "Business traveller · Toronto"
+      }
+    ]
+  },
+  "search": {
+    "title": "Find your destination",
+    "subtitle": "Search welcome scores for black travellers, mixed-race couples...",
+    "placeholder": "Try a city or country…",
+    "sortLabel": "Sort cities by",
+    "sortByScore": "Welcome score",
+    "sortByName": "Name (A–Z)",
+    "cityCount": "{n} city | {n} cities",
+    "forQuery": " for \"{query}\"",
+    "reviews": "{n} review | {n} reviews",
+    "view": "View",
+    "noResultsTitle": "No destinations match your search",
+    "noResultsSubtitle": "We're adding cities every week. Try a different term or continent.",
+    "clearFilters": "Clear filters",
+    "continents": {
+      "All": "All",
+      "Africa": "Africa",
+      "Americas": "Americas",
+      "Asia": "Asia",
+      "Europe": "Europe",
+      "Middle East": "Middle East",
+      "Oceania": "Oceania"
+    }
+  },
+  "city": {
+    "allCities": "All cities",
+    "welcomeScore": "Welcome score",
+    "reviews": "{n} review | {n} reviews",
+    "isItSafe": "Is {city} safe for black travellers?",
+    "scoreBlend": "Our {score}/10 welcome score blends editorial research, official data and {count} reviews from mixed-race couples, black travellers and travelers of color who've been to {city}.",
+    "everyHostVetted": "Every host is vetted as welcoming",
+    "breakdownLabel": "The breakdown",
+    "howWelcoming": "How welcoming is {city}?",
+    "safety": "Safety",
+    "realReviewsLabel": "Real reviews",
+    "whatTravellersSay": "What travellers say",
+    "seeItLabel": "See it",
+    "placesIn": "Places in {city}"
+  },
+  "country": {
+    "allCities": "All cities",
+    "city": "{n} city | {n} cities",
+    "averageWelcomeScore": "Average welcome score",
+    "across": "across {n}",
+    "isItSafe": "Is {country} safe for black travellers?",
+    "scoreBlend": "Across the {count}, the average welcome score is {score}/10 — blending editorial research, official data and reviews from mixed-race couples, black travellers and travelers of color.",
+    "exploreLabel": "Explore",
+    "citiesIn": "Cities in {country}",
+    "noCities": "No cities listed for {country} yet."
+  },
+  "comments": {
+    "loading": "Loading reviews…",
+    "stampsCollected": "Stamps collected",
+    "deleteComment": "Delete comment",
+    "deleteReply": "Delete reply",
+    "deleteConfirm": "Delete?",
+    "cancel": "Cancel",
+    "reply": "Reply",
+    "replies": "{n} reply | {n} replies",
+    "replyPlaceholder": "Write a reply…",
+    "send": "Send",
+    "signInToReply": "Sign in to reply",
+    "seeAllReviews": "See all {n} reviews",
+    "noReviewsYet": "No reviews yet. Be the first!",
+    "translate": "Translate",
+    "showOriginal": "Show original",
+    "translating": "Translating…",
+    "translatedFrom": "Translated from {lang}"
+  }
+}

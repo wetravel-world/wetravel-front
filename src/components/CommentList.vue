@@ -1,6 +1,6 @@
 <template>
   <div :class="visibleComments.length < 3 ? '' : 'overflow-y-scroll h-[40vh] pb-10'">
-    <p v-if="store.loading" class="text-[14px] text-wt-sub py-4">Loading reviews…</p>
+    <p v-if="store.loading" class="text-[14px] text-wt-sub py-4">{{ t('comments.loading') }}</p>
 
     <div v-else class="flex flex-col gap-4 ">
       <div
@@ -29,7 +29,7 @@
                        opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-150"
               >
                 <div class="bg-white border border-wt-line rounded-2xl shadow-lg px-4 py-3 ml-[25%] w-[50vw]">
-                  <p class="text-[11px] font-semibold text-wt-sub uppercase tracking-wide mb-2.5">Stamps collected</p>
+                  <p class="text-[11px] font-semibold text-wt-sub uppercase tracking-wide mb-2.5">{{ t('comments.stampsCollected') }}</p>
                   <div class="flex flex-wrap justify-center">
                     <img
                       v-for="(slug, i) in comment.author_stamps"
@@ -57,15 +57,15 @@
                 v-if="!confirmDeleteComments.has(comment.id)"
                 @click="startDeleteComment(comment.id)"
                 class="p-1.5 text-wt-sub hover:text-red-400 transition-colors rounded-lg flex-shrink-0"
-                title="Delete comment"
+                :title="t('comments.deleteComment')"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
                 </svg>
               </button>
               <div v-else class="flex items-center gap-1.5 flex-shrink-0">
-                <button @click="confirmComment(comment.id)" class="text-[12px] font-bold text-red-500 hover:text-red-600 transition-colors">Delete?</button>
-                <button @click="cancelDeleteComment(comment.id)" class="text-[12px] text-wt-sub hover:text-wt-ink transition-colors">Cancel</button>
+                <button @click="confirmComment(comment.id)" class="text-[12px] font-bold text-red-500 hover:text-red-600 transition-colors">{{ t('comments.deleteConfirm') }}</button>
+                <button @click="cancelDeleteComment(comment.id)" class="text-[12px] text-wt-sub hover:text-wt-ink transition-colors">{{ t('comments.cancel') }}</button>
               </div>
             </template>
 
@@ -78,7 +78,9 @@
             </div>
           </div>
 
-          <p class="m-0 text-[14.5px] leading-relaxed text-wt-ink">{{ comment.body }}</p>
+          <p class="m-0 text-[14.5px] leading-relaxed text-wt-ink">
+            {{ shownTranslations.has(commentKey(comment.id)) ? translations[commentKey(comment.id)] : comment.body }}
+          </p>
 
           <!-- reply toggle -->
           <button
@@ -89,15 +91,24 @@
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
             <span v-if="comment.replies.length">
-              {{ comment.replies.length }} {{ comment.replies.length === 1 ? 'reply' : 'replies' }}
+              {{ t('comments.replies', comment.replies.length) }}
             </span>
-            <span v-else>Reply</span>
+            <span v-else>{{ t('comments.reply') }}</span>
             <svg
               :class="['w-3 h-3 transition-transform', openReplies.has(comment.id) ? 'rotate-180' : '']"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
             >
               <polyline points="6 9 12 15 18 9"/>
             </svg>
+          </button>
+          <button
+            @click="toggleTranslate(commentKey(comment.id), comment.body)"
+            :disabled="translatingKeys.has(commentKey(comment.id))"
+            class="ml-2 text-[12px] font-semibold text-wt-coral hover:underline disabled:opacity-60"
+          >
+            <span v-if="translatingKeys.has(commentKey(comment.id))">{{ t('comments.translating') }}</span>
+            <span v-else-if="shownTranslations.has(commentKey(comment.id))">{{ t('comments.showOriginal') }}</span>
+            <span v-else>{{ t('comments.translate') }}</span>
           </button>
         </div>
 
@@ -129,19 +140,30 @@
                     v-if="!confirmDeleteReplies.has(replyKey(comment.id, reply.id))"
                     @click="startDeleteReply(comment.id, reply.id)"
                     class="ml-auto p-1 text-wt-sub hover:text-red-400 transition-colors rounded"
-                    title="Delete reply"
+                    :title="t('comments.deleteReply')"
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
                     </svg>
                   </button>
                   <div v-else class="ml-auto flex items-center gap-1.5">
-                    <button @click="confirmReply(comment.id, reply.id)" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors">Delete?</button>
-                    <button @click="cancelDeleteReply(comment.id, reply.id)" class="text-[11px] text-wt-sub hover:text-wt-ink transition-colors">Cancel</button>
+                    <button @click="confirmReply(comment.id, reply.id)" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors">{{ t('comments.deleteConfirm') }}</button>
+                    <button @click="cancelDeleteReply(comment.id, reply.id)" class="text-[11px] text-wt-sub hover:text-wt-ink transition-colors">{{ t('comments.cancel') }}</button>
                   </div>
                 </template>
               </div>
-              <p class="m-0 text-[13.5px] leading-relaxed text-wt-ink">{{ reply.body }}</p>
+              <p class="m-0 text-[13.5px] leading-relaxed text-wt-ink">
+                {{ shownTranslations.has(replyKey(comment.id, reply.id)) ? translations[replyKey(comment.id, reply.id)] : reply.body }}
+              </p>
+              <button
+                @click="toggleTranslate(replyKey(comment.id, reply.id), reply.body)"
+                :disabled="translatingKeys.has(replyKey(comment.id, reply.id))"
+                class="mt-1 text-[11px] font-semibold text-wt-coral hover:underline disabled:opacity-60"
+              >
+                <span v-if="translatingKeys.has(replyKey(comment.id, reply.id))">{{ t('comments.translating') }}</span>
+                <span v-else-if="shownTranslations.has(replyKey(comment.id, reply.id))">{{ t('comments.showOriginal') }}</span>
+                <span v-else>{{ t('comments.translate') }}</span>
+              </button>
             </div>
           </div>
 
@@ -160,7 +182,7 @@
               <textarea
                 v-model="replyBodies[comment.id]"
                 rows="2"
-                placeholder="Write a reply…"
+                :placeholder="t('comments.replyPlaceholder')"
                 class="flex-1 resize-none text-[13.5px] text-wt-ink bg-white border border-wt-line rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-wt-coral transition leading-relaxed"
               />
               <button
@@ -168,7 +190,7 @@
                 :disabled="submitting[comment.id] || !replyBodies[comment.id]?.trim()"
                 class="flex-shrink-0 bg-wt-coral text-white rounded-xl px-4 py-2.5 text-[13px] font-bold disabled:opacity-50 transition"
               >
-                {{ submitting[comment.id] ? '…' : 'Send' }}
+                {{ submitting[comment.id] ? '…' : t('comments.send') }}
               </button>
             </div>
           </div>
@@ -177,7 +199,7 @@
             to="/auth/login"
             class="text-[13px] text-wt-coral font-semibold no-underline hover:underline"
           >
-            Sign in to reply
+            {{ t('comments.signInToReply') }}
           </RouterLink>
         </div>
       </div>
@@ -192,20 +214,23 @@
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
-      See all {{ store.comments.length }} reviews
+      {{ t('comments.seeAllReviews', store.comments.length) }}
     </button>
 
     <p v-if="!store.loading && !store.comments.length" class="text-[14px] text-wt-sub py-5">
-      No reviews yet. Be the first!
+      {{ t('comments.noReviewsYet') }}
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useCommentsStore } from '@/stores/comments'
 import { useAuthStore } from '@/stores/auth'
+import { translateText } from '@/composables/useTranslate'
 
+const { t, locale } = useI18n()
 const props = defineProps<{ citySlug: string; collapsed?: boolean }>()
 const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
 const TILTS = [-4, 3, -2, 5, -3, 2, -6, 4, -1, 3, -5, 2, -3, 4, -2, 1]
@@ -288,6 +313,36 @@ async function submitReply(commentId: number) {
 }
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  return new Date(iso).toLocaleDateString(locale.value === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+}
+
+// On-demand translation — proposed via a button, never automatic (per CLAUDE.md
+// affiliate-credential pattern, the Google Translate key stays server-side).
+const translations = reactive<Record<string, string>>({})
+const translatingKeys = ref<Set<string>>(new Set())
+const shownTranslations = ref<Set<string>>(new Set())
+
+function commentKey(commentId: number) {
+  return `c-${commentId}`
+}
+
+async function toggleTranslate(key: string, body: string) {
+  if (shownTranslations.value.has(key)) {
+    shownTranslations.value.delete(key)
+    shownTranslations.value = new Set(shownTranslations.value)
+    return
+  }
+  if (!translations[key]) {
+    translatingKeys.value = new Set([...translatingKeys.value, key])
+    try {
+      translations[key] = await translateText(body, locale.value)
+    } catch {
+      return
+    } finally {
+      translatingKeys.value.delete(key)
+      translatingKeys.value = new Set(translatingKeys.value)
+    }
+  }
+  shownTranslations.value = new Set([...shownTranslations.value, key])
 }
 </script>

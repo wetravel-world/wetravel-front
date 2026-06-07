@@ -8,7 +8,7 @@
             <img src="/logo.png" alt="WeTravel" width="40" height="27" class="h-8 w-auto" />
             <span class="font-serif text-xl font-semibold text-white tracking-[-0.3px]">WeTravel</span>
           </div>
-          <p class="text-sm leading-relaxed text-[#b8ac9c] m-0">Helping black travellers and mixed-race couples find the places where they belong.</p>
+          <p class="text-sm leading-relaxed text-[#b8ac9c] m-0">{{ t('footer.tagline') }}</p>
         </div>
         <!-- links -->
         <div class="grid grid-cols-3 gap-6 md:flex md:gap-14">
@@ -25,9 +25,9 @@
         </div>
       </div>
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <span class="text-[13px] text-[#988c7c]">© {{ year }} WeTravel</span>
+        <span class="text-[13px] text-[#988c7c]">{{ t('footer.copyright', { year }) }}</span>
         <span class="font-mono text-[11px] text-[#988c7c] sm:max-w-[560px] leading-relaxed sm:text-right">
-          Scores shown are community-driven data and do not represent official safety assessments of any city.
+          {{ t('footer.disclaimer') }}
         </span>
       </div>
     </div>
@@ -35,33 +35,37 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 type FooterLink = { label: string; to?: string; href?: string }
 
+const { t } = useI18n()
 const year = new Date().getFullYear()
 
-const footerLinks: { heading: string; links: FooterLink[] }[] = [
+const footerLinks = computed<{ heading: string; links: FooterLink[] }[]>(() => [
   {
-    heading: 'Discover',
+    heading: t('footer.discover'),
     links: [
-      { label: 'Explore cities' },
-      { label: 'Top rated' },
-      { label: 'New this month' },
-      { label: 'Map' },
+      { label: t('footer.exploreCities') },
+      { label: t('footer.topRated') },
+      { label: t('footer.newThisMonth') },
+      { label: t('footer.map') },
     ],
   },
   {
-    heading: 'Legal',
+    heading: t('footer.legal'),
     links: [
-      { label: 'Privacy Policy', to: '/rgpd' },
-      { label: 'Terms of Service', to: '/terms' },
-      { label: 'Cookies', to: '/cookies' },
+      { label: t('footer.privacyPolicy'), to: '/rgpd' },
+      { label: t('footer.termsOfService'), to: '/terms' },
+      { label: t('footer.cookies'), to: '/cookies' },
     ],
   },
   {
-    heading: 'Contact',
+    heading: t('footer.contact'),
     links: [
       { label: 'contact@we-travel.world', href: 'mailto:contact@we-travel.world' },
     ],
   },
-]
+])
 </script>
