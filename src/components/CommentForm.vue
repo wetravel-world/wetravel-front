@@ -21,10 +21,12 @@
       </button>
     </form>
   </div>
-  <div v-else class="bg-wt-bg border border-wt-line rounded-2xl p-5 text-center mb-2">
-    <p class="text-[14px] text-wt-sub m-0">
-      <RouterLink to="/auth/login" class="text-wt-coral font-bold no-underline">Sign in</RouterLink> to leave a review.
-    </p>
+  <div v-else class="bg-white rounded-2xl px-5 py-[18px] shadow-[0_1px_3px_rgba(42,32,24,0.05)] mb-5">
+    <h3 class="font-serif text-[18px] font-semibold m-0 mb-[14px]">Share your experience</h3>
+    <RouterLink :to="{ path: '/auth/login', query: { redirect: route.fullPath } }"
+      class="inline-block bg-wt-coral text-white no-underline rounded-[13px] px-[22px] py-[13px] font-bold text-[15px]">
+      Write a review
+    </RouterLink>
   </div>
 
   <!-- community guidelines modal -->
@@ -91,10 +93,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useCommentsStore } from '@/stores/comments'
 
 const props = defineProps<{ citySlug: string }>()
+const route = useRoute()
 const auth = useAuthStore()
 const comments = useCommentsStore()
 

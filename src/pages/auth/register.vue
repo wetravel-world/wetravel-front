@@ -36,7 +36,7 @@
       <div v-else class="flex-1 flex flex-col justify-center max-w-[400px] w-full mx-auto pb-10">
         <h1 class="font-serif text-[34px] font-semibold tracking-[-0.6px] m-0 mb-2">Create your account</h1>
         <p class="text-[15.5px] text-wt-sub m-0 mb-7 leading-[1.5]">Save cities, write reviews and book vetted stays with your referral perks.</p>
-        <GoogleSignInButton label="Sign up with Google" class="mb-5" />
+        <GoogleSignInButton label="Sign up with Google" :redirect="(route.query.redirect as string) || '/'" class="mb-5" />
         <div class="flex items-center gap-3 mb-5">
           <div class="flex-1 h-px bg-wt-line"></div>
           <span class="text-[13px] text-wt-sub font-medium">or</span>
@@ -101,10 +101,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import GoogleSignInButton from '@/components/GoogleSignInButton.vue'
 import api from '@/composables/useApi'
+import { setPostAuthRedirect } from '@/composables/usePostAuthRedirect'
 
+const route = useRoute()
 const username = ref('')
 const email = ref('')
 const password = ref('')
@@ -128,6 +131,7 @@ async function submit() {
   loading.value = true
   try {
     await auth.register({ username: username.value, email: email.value, password: password.value })
+    setPostAuthRedirect((route.query.redirect as string) || '/')
     submittedEmail.value = email.value
     emailSent.value = true
   } catch (e: any) {

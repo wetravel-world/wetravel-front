@@ -28,7 +28,7 @@
                 class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-20 pointer-events-none
                        opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-150"
               >
-                <div class="bg-white border border-wt-line rounded-2xl shadow-lg px-4 py-3 ml-[25%] w-[50vw]">
+                <div class="bg-white border border-wt-line rounded-2xl shadow-lg px-4 py-3 ml-[25%] w-[50vw] md:ml-[0%] md:w-[25vw]">
                   <p class="text-[11px] font-semibold text-wt-sub uppercase tracking-wide mb-2.5">{{ t('comments.stampsCollected') }}</p>
                   <div class="flex flex-wrap justify-center">
                     <img
@@ -37,7 +37,7 @@
                       :src="`${apiBase}/static/img/stamps/${slug}.png`"
                       :title="slug.replace(/-/g, ' ')"
                       :style="{ transform: `rotate(${TILTS[i % TILTS.length]}deg)` }"
-                      class="w-[15vw] object-contain"
+                      class="w-[20vw] md:w-[5vw] object-contain"
                     />
                   </div>
                 </div>

@@ -28,7 +28,7 @@
         </div>
         <h1 class="font-serif text-[26px] font-semibold tracking-[-0.4px] m-0 mb-2">Email confirmed!</h1>
         <p class="text-[15px] text-wt-sub leading-[1.6] m-0 mb-7">You're all set. Start exploring welcoming cities.</p>
-        <RouterLink to="/"
+        <RouterLink :to="redirectTarget"
           class="block w-full bg-wt-coral text-white no-underline rounded-[13px] py-[14px] font-extrabold text-[16px]">
           Go to WeTravel
         </RouterLink>
@@ -61,6 +61,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import api from '@/composables/useApi'
+import { consumePostAuthRedirect } from '@/composables/usePostAuthRedirect'
 
 const route = useRoute()
 const router = useRouter()
@@ -68,6 +69,7 @@ const auth = useAuthStore()
 
 const state = ref<'loading' | 'success' | 'error'>('loading')
 const errorMessage = ref('This verification link is invalid or has already been used.')
+const redirectTarget = ref('/')
 
 onMounted(async () => {
   const token = route.query.token as string
@@ -78,8 +80,9 @@ onMounted(async () => {
   try {
     await api.get(`/auth/verify-email/?token=${token}`)
     await auth.fetchMe()
+    redirectTarget.value = consumePostAuthRedirect()
     state.value = 'success'
-    setTimeout(() => router.push('/'), 2000)
+    setTimeout(() => router.push(redirectTarget.value), 2000)
   } catch (e: any) {
     errorMessage.value = e?.response?.data?.detail ?? 'This verification link is invalid or has already been used.'
     state.value = 'error'
