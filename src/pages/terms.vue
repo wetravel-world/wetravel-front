@@ -198,6 +198,7 @@ import { useSeo } from '@/composables/useSeo'
 useSeo(() => ({
   title: 'Terms of Service — WeTravel',
   description: 'Read the Terms of Service for WeTravel, the travel platform for Black travelers and mixed-race couples.',
+  canonical: 'https://we-travel.world/terms',
 }))
 
 const lastUpdated = 'June 2026'

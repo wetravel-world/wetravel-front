@@ -195,6 +195,7 @@ import { useSeo } from '@/composables/useSeo'
 useSeo(() => ({
   title: 'Cookie Policy — WeTravel',
   description: 'Learn how WeTravel uses cookies and how to manage your preferences.',
+  canonical: 'https://we-travel.world/cookies',
 }))
 
 const lastUpdated = 'June 2026'
