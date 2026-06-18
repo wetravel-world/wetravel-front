@@ -106,7 +106,7 @@ import { useAuthStore } from '@/stores/auth'
 import GoogleSignInButton from '@/components/GoogleSignInButton.vue'
 import api from '@/composables/useApi'
 import { setPostAuthRedirect } from '@/composables/usePostAuthRedirect'
-import { trackConversion } from '@/composables/useGoogleAds'
+import { trackRegistration } from '@/composables/useGoogleAds'
 
 const route = useRoute()
 const username = ref('')
@@ -135,7 +135,7 @@ async function submit() {
     setPostAuthRedirect((route.query.redirect as string) || '/')
     submittedEmail.value = email.value
     emailSent.value = true
-    trackConversion('AW-18219477717/3t5yCNKBgbscENXV3O9D')
+    trackRegistration()
   } catch (e: any) {
     const data = e?.response?.data
     if (data) serverErrors.value = Object.values(data).flat() as string[]

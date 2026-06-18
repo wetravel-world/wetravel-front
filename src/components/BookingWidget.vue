@@ -12,6 +12,7 @@
         :href="bookingUrl"
         target="_blank"
         rel="noopener noreferrer"
+        @click="trackBookingClick"
         class="block w-full bg-wt-coral text-white rounded-[13px] py-4 font-extrabold text-base text-center no-underline min-h-[52px] flex items-center justify-center"
       >
         Find hotels in {{ cityName }}
@@ -24,6 +25,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import api from '@/composables/useApi'
+import { trackBookingClick } from '@/composables/useGoogleAds'
 
 const props = defineProps<{ citySlug: string; cityName: string }>()
 const bookingUrl = ref('#')

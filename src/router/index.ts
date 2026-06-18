@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { trackPageview } from '@/composables/useGoogleAds'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -34,6 +35,10 @@ router.beforeEach((to) => {
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return { path: '/auth/login', query: { redirect: to.fullPath } }
   }
+})
+
+router.afterEach(() => {
+  trackPageview()
 })
 
 export default router
