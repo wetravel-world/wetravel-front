@@ -1,8 +1,10 @@
 <template>
   <div class="font-sans text-wt-ink bg-wt-bg">
 
+    <AdHookBanner @ad-detected="isAd = true" />
+
     <!-- hero -->
-    <section class="max-w-[1300px] mx-auto px-4 md:px-14 pt-8 pb-10 md:pt-9 md:pb-14 grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-10 md:gap-14 items-center">
+    <section v-if="!isAd" class="max-w-[1300px] mx-auto px-4 md:px-14 pt-8 pb-10 md:pt-9 md:pb-14 grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-10 md:gap-14 items-center">
       <div>
         <div class="inline-flex items-center gap-2 bg-wt-coral-soft rounded-full px-4 py-2 mb-6">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c44e2c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
@@ -208,10 +210,12 @@ import { useCitiesStore } from '@/stores/cities'
 import { useSeo } from '@/composables/useSeo'
 import SearchBar from '@/components/SearchBar.vue'
 import CityCard from '@/components/CityCard.vue'
+import AdHookBanner from '@/components/AdHookBanner.vue'
 
 const { t, tm } = useI18n()
 const router = useRouter()
 const store = useCitiesStore()
+const isAd = ref(false)
 
 // Netlify Image CDN resizes rome.webp to the correct mobile width at the CDN edge.
 // Must be a JS constant (not a static HTML attribute) so Vite doesn't try to resolve
